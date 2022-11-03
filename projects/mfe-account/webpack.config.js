@@ -10,7 +10,7 @@ sharedMappings.register(
 
 module.exports = {
   output: {
-    uniqueName: "mfeProfile",
+    uniqueName: "mfeAccount",
     publicPath: "auto"
   },
   optimization: {
@@ -29,15 +29,17 @@ module.exports = {
         library: { type: "module" },
 
         // For remotes (please adjust)
-        name: "mfeProfile",
+        name: "mfeAccount",
         filename: "remoteEntry.js",
         exposes: {
-          './Module': './projects/mfe-profile/src/app/profile/profile.module.ts',
-        },
+            './Module': './projects/mfe-account/src/app/account/account.module.ts',
+          },        
         
         // For hosts (please adjust)
         // remotes: {
         //     "shell": "http://localhost:4200/remoteEntry.js",
+        //     "mfeProfile": "http://localhost:4202/remoteEntry.js",
+
         // },
 
         shared: share({
@@ -45,6 +47,7 @@ module.exports = {
           "@angular/common": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
           "@angular/common/http": { singleton: true, strictVersion: true, requiredVersion: 'auto' }, 
           "@angular/router": { singleton: true, strictVersion: true, requiredVersion: 'auto' },
+
           ...sharedMappings.getDescriptors()
         })
         

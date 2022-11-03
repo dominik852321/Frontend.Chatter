@@ -1,14 +1,10 @@
 import { Component } from '@angular/core';
 
-
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
-  styles: []
+  styleUrls: []
 })
 export class AppComponent {
-
-  constructor() { }
-
-
+  title = 'mfe-account';
 }

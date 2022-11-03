@@ -170,11 +170,12 @@
 				}
 			}
 		},
-		"mfe-basket": {
+		"mfe-chat": {
 			"projectType": "application",
 			"schematics": {
 				"@schematics/angular:component": {
 					"inlineStyle": true,
+					"style": "scss",
 					"skipTests": true
 				},
 				"@schematics/angular:class": {
@@ -197,32 +198,30 @@
 				},
 				"@schematics/angular:service": {
 					"skipTests": true
-				},
-				"@schematics/angular:application": {
-					"strict": true
 				}
 			},
-			"root": "projects/mfe-basket",
-			"sourceRoot": "projects/mfe-basket/src",
+			"root": "projects/mfe-chat",
+			"sourceRoot": "projects/mfe-chat/src",
 			"prefix": "app",
 			"architect": {
 				"build": {
 					"builder": "ngx-build-plus:browser",
 					"options": {
-						"outputPath": "dist/mfe-basket",
-						"index": "projects/mfe-basket/src/index.html",
-						"main": "projects/mfe-basket/src/main.ts",
-						"polyfills": "projects/mfe-basket/src/polyfills.ts",
-						"tsConfig": "projects/mfe-basket/tsconfig.app.json",
+						"outputPath": "dist/mfe-chat",
+						"index": "projects/mfe-chat/src/index.html",
+						"main": "projects/mfe-chat/src/main.ts",
+						"polyfills": "projects/mfe-chat/src/polyfills.ts",
+						"tsConfig": "projects/mfe-chat/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/mfe-basket/src/favicon.ico",
-							"projects/mfe-basket/src/assets"
+							"projects/mfe-chat/src/favicon.ico",
+							"projects/mfe-chat/src/assets"
 						],
 						"styles": [
-							"projects/mfe-basket/src/styles.css"
+							"projects/mfe-chat/src/styles.scss"
 						],
 						"scripts": [],
-						"extraWebpackConfig": "projects/mfe-basket/webpack.config.js",
+						"extraWebpackConfig": "projects/mfe-chat/webpack.config.js",
 						"commonChunk": false
 					},
 					"configurations": {
@@ -241,12 +240,12 @@
 							],
 							"fileReplacements": [
 								{
-									"replace": "projects/mfe-basket/src/environments/environment.ts",
-									"with": "projects/mfe-basket/src/environments/environment.prod.ts"
+									"replace": "projects/mfe-chat/src/environments/environment.ts",
+									"with": "projects/mfe-chat/src/environments/environment.prod.ts"
 								}
 							],
 							"outputHashing": "all",
-							"extraWebpackConfig": "projects/mfe-basket/webpack.prod.config.js"
+							"extraWebpackConfig": "projects/mfe-chat/webpack.prod.config.js"
 						},
 						"development": {
 							"buildOptimizer": false,
@@ -263,40 +262,41 @@
 					"builder": "ngx-build-plus:dev-server",
 					"configurations": {
 						"production": {
-							"browserTarget": "mfe-basket:build:production",
-							"extraWebpackConfig": "projects/mfe-basket/webpack.prod.config.js"
+							"browserTarget": "mfe-chat:build:production",
+							"extraWebpackConfig": "projects/mfe-chat/webpack.prod.config.js"
 						},
 						"development": {
-							"browserTarget": "mfe-basket:build:development"
+							"browserTarget": "mfe-chat:build:development"
 						}
 					},
 					"defaultConfiguration": "development",
 					"options": {
 						"port": 4201,
 						"publicHost": "http://localhost:4201",
-						"extraWebpackConfig": "projects/mfe-basket/webpack.config.js"
+						"extraWebpackConfig": "projects/mfe-chat/webpack.config.js"
 					}
 				},
 				"extract-i18n": {
 					"builder": "ngx-build-plus:extract-i18n",
 					"options": {
-						"browserTarget": "mfe-basket:build",
-						"extraWebpackConfig": "projects/mfe-basket/webpack.config.js"
+						"browserTarget": "mfe-chat:build",
+						"extraWebpackConfig": "projects/mfe-chat/webpack.config.js"
 					}
 				},
 				"test": {
 					"builder": "@angular-devkit/build-angular:karma",
 					"options": {
-						"main": "projects/mfe-basket/src/test.ts",
-						"polyfills": "projects/mfe-basket/src/polyfills.ts",
-						"tsConfig": "projects/mfe-basket/tsconfig.spec.json",
-						"karmaConfig": "projects/mfe-basket/karma.conf.js",
+						"main": "projects/mfe-chat/src/test.ts",
+						"polyfills": "projects/mfe-chat/src/polyfills.ts",
+						"tsConfig": "projects/mfe-chat/tsconfig.spec.json",
+						"karmaConfig": "projects/mfe-chat/karma.conf.js",
+						"inlineStyleLanguage": "scss",
 						"assets": [
-							"projects/mfe-basket/src/favicon.ico",
-							"projects/mfe-basket/src/assets"
+							"projects/mfe-chat/src/favicon.ico",
+							"projects/mfe-chat/src/assets"
 						],
 						"styles": [
-							"projects/mfe-basket/src/styles.css"
+							"projects/mfe-chat/src/styles.scss"
 						],
 						"scripts": []
 					}
@@ -430,6 +430,138 @@
 						],
 						"styles": [
 							"projects/mfe-profile/src/styles.css"
+						],
+						"scripts": []
+					}
+				}
+			}
+		},
+		"mfe-account": {
+			"projectType": "application",
+			"schematics": {
+				"@schematics/angular:component": {
+					"style": "scss",
+					"skipTests": true
+				},
+				"@schematics/angular:class": {
+					"skipTests": true
+				},
+				"@schematics/angular:directive": {
+					"skipTests": true
+				},
+				"@schematics/angular:guard": {
+					"skipTests": true
+				},
+				"@schematics/angular:interceptor": {
+					"skipTests": true
+				},
+				"@schematics/angular:pipe": {
+					"skipTests": true
+				},
+				"@schematics/angular:resolver": {
+					"skipTests": true
+				},
+				"@schematics/angular:service": {
+					"skipTests": true
+				}
+			},
+			"root": "projects/mfe-account",
+			"sourceRoot": "projects/mfe-account/src",
+			"prefix": "app",
+			"architect": {
+				"build": {
+					"builder": "ngx-build-plus:browser",
+					"options": {
+						"outputPath": "dist/mfe-account",
+						"index": "projects/mfe-account/src/index.html",
+						"main": "projects/mfe-account/src/main.ts",
+						"polyfills": "projects/mfe-account/src/polyfills.ts",
+						"tsConfig": "projects/mfe-account/tsconfig.app.json",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/mfe-account/src/favicon.ico",
+							"projects/mfe-account/src/assets"
+						],
+						"styles": [
+							"projects/mfe-account/src/styles.scss"
+						],
+						"scripts": [],
+						"extraWebpackConfig": "projects/mfe-account/webpack.config.js",
+						"commonChunk": false
+					},
+					"configurations": {
+						"production": {
+							"budgets": [
+								{
+									"type": "initial",
+									"maximumWarning": "500kb",
+									"maximumError": "1mb"
+								},
+								{
+									"type": "anyComponentStyle",
+									"maximumWarning": "2kb",
+									"maximumError": "4kb"
+								}
+							],
+							"fileReplacements": [
+								{
+									"replace": "projects/mfe-account/src/environments/environment.ts",
+									"with": "projects/mfe-account/src/environments/environment.prod.ts"
+								}
+							],
+							"outputHashing": "all",
+							"extraWebpackConfig": "projects/mfe-account/webpack.prod.config.js"
+						},
+						"development": {
+							"buildOptimizer": false,
+							"optimization": false,
+							"vendorChunk": true,
+							"extractLicenses": false,
+							"sourceMap": true,
+							"namedChunks": true
+						}
+					},
+					"defaultConfiguration": "production"
+				},
+				"serve": {
+					"builder": "ngx-build-plus:dev-server",
+					"configurations": {
+						"production": {
+							"browserTarget": "mfe-account:build:production",
+							"extraWebpackConfig": "projects/mfe-account/webpack.prod.config.js"
+						},
+						"development": {
+							"browserTarget": "mfe-account:build:development"
+						}
+					},
+					"defaultConfiguration": "development",
+					"options": {
+						"port": 4203,
+						"publicHost": "http://localhost:4203",
+						"extraWebpackConfig": "projects/mfe-account/webpack.config.js"
+					}
+				},
+				"extract-i18n": {
+					"builder": "ngx-build-plus:extract-i18n",
+					"options": {
+						"browserTarget": "mfe-account:build",
+						"extraWebpackConfig": "projects/mfe-account/webpack.config.js"
+					}
+				},
+				"test": {
+					"builder": "@angular-devkit/build-angular:karma",
+					"options": {
+						"main": "projects/mfe-account/src/test.ts",
+						"polyfills": "projects/mfe-account/src/polyfills.ts",
+						"tsConfig": "projects/mfe-account/tsconfig.spec.json",
+						"karmaConfig": "projects/mfe-account/karma.conf.js",
+						"inlineStyleLanguage": "scss",
+						"assets": [
+							"projects/mfe-account/src/favicon.ico",
+							"projects/mfe-account/src/assets"
+						],
+						"styles": [
+							"projects/mfe-account/src/styles.scss"
 						],
 						"scripts": []
 					}
