@@ -1,572 +1,764 @@
 {
-	"$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-	"cli": {
-		"analytics": false
-	},
-	"version": 1,
-	"newProjectRoot": "projects",
-	"projects": {
-		"shell": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"inlineStyle": true,
-					"skipTests": true
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				},
-				"@schematics/angular:application": {
-					"strict": true
-				}
-			},
-			"root": "projects/shell",
-			"sourceRoot": "projects/shell/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "ngx-build-plus:browser",
-					"options": {
-						"outputPath": "dist/shell",
-						"index": "projects/shell/src/index.html",
-						"main": "projects/shell/src/main.ts",
-						"polyfills": "projects/shell/src/polyfills.ts",
-						"tsConfig": "projects/shell/tsconfig.app.json",
-						"assets": [
-							"projects/shell/src/favicon.ico",
-							"projects/shell/src/assets"
-						],
-						"styles": [
-							"projects/shell/src/styles.css"
-						],
-						"scripts": [],
-						"extraWebpackConfig": "projects/shell/webpack.config.js",
-						"commonChunk": false
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"fileReplacements": [
-								{
-									"replace": "projects/shell/src/environments/environment.ts",
-									"with": "projects/shell/src/environments/environment.prod.ts"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/shell/webpack.prod.config.js"
-						},
-						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"vendorChunk": true,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"browserTarget": "shell:build:production",
-							"extraWebpackConfig": "projects/shell/webpack.prod.config.js"
-						},
-						"development": {
-							"browserTarget": "shell:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4200,
-						"publicHost": "http://localhost:4200",
-						"extraWebpackConfig": "projects/shell/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
-					"options": {
-						"browserTarget": "shell:build",
-						"extraWebpackConfig": "projects/shell/webpack.config.js"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/shell/src/test.ts",
-						"polyfills": "projects/shell/src/polyfills.ts",
-						"tsConfig": "projects/shell/tsconfig.spec.json",
-						"karmaConfig": "projects/shell/karma.conf.js",
-						"assets": [
-							"projects/shell/src/favicon.ico",
-							"projects/shell/src/assets"
-						],
-						"styles": [
-							"projects/shell/src/styles.css"
-						],
-						"scripts": []
-					}
-				}
-			}
-		},
-		"shared": {
-			"projectType": "library",
-			"root": "projects/shared",
-			"sourceRoot": "projects/shared/src",
-			"prefix": "lib",
-			"architect": {
-				"build": {
-					"builder": "@angular-devkit/build-angular:ng-packagr",
-					"options": {
-						"project": "projects/shared/ng-package.json"
-					},
-					"configurations": {
-						"production": {
-							"tsConfig": "projects/shared/tsconfig.lib.prod.json"
-						},
-						"development": {
-							"tsConfig": "projects/shared/tsconfig.lib.json"
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/shared/src/test.ts",
-						"tsConfig": "projects/shared/tsconfig.spec.json",
-						"karmaConfig": "projects/shared/karma.conf.js"
-					}
-				}
-			}
-		},
-		"mfe-chat": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"inlineStyle": true,
-					"style": "scss",
-					"skipTests": true
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				}
-			},
-			"root": "projects/mfe-chat",
-			"sourceRoot": "projects/mfe-chat/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "ngx-build-plus:browser",
-					"options": {
-						"outputPath": "dist/mfe-chat",
-						"index": "projects/mfe-chat/src/index.html",
-						"main": "projects/mfe-chat/src/main.ts",
-						"polyfills": "projects/mfe-chat/src/polyfills.ts",
-						"tsConfig": "projects/mfe-chat/tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mfe-chat/src/favicon.ico",
-							"projects/mfe-chat/src/assets"
-						],
-						"styles": [
-							"projects/mfe-chat/src/styles.scss"
-						],
-						"scripts": [],
-						"extraWebpackConfig": "projects/mfe-chat/webpack.config.js",
-						"commonChunk": false
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"fileReplacements": [
-								{
-									"replace": "projects/mfe-chat/src/environments/environment.ts",
-									"with": "projects/mfe-chat/src/environments/environment.prod.ts"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/mfe-chat/webpack.prod.config.js"
-						},
-						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"vendorChunk": true,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"browserTarget": "mfe-chat:build:production",
-							"extraWebpackConfig": "projects/mfe-chat/webpack.prod.config.js"
-						},
-						"development": {
-							"browserTarget": "mfe-chat:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4201,
-						"publicHost": "http://localhost:4201",
-						"extraWebpackConfig": "projects/mfe-chat/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
-					"options": {
-						"browserTarget": "mfe-chat:build",
-						"extraWebpackConfig": "projects/mfe-chat/webpack.config.js"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/mfe-chat/src/test.ts",
-						"polyfills": "projects/mfe-chat/src/polyfills.ts",
-						"tsConfig": "projects/mfe-chat/tsconfig.spec.json",
-						"karmaConfig": "projects/mfe-chat/karma.conf.js",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mfe-chat/src/favicon.ico",
-							"projects/mfe-chat/src/assets"
-						],
-						"styles": [
-							"projects/mfe-chat/src/styles.scss"
-						],
-						"scripts": []
-					}
-				}
-			}
-		},
-		"mfe-profile": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"inlineStyle": true,
-					"skipTests": true
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				},
-				"@schematics/angular:application": {
-					"strict": true
-				}
-			},
-			"root": "projects/mfe-profile",
-			"sourceRoot": "projects/mfe-profile/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "ngx-build-plus:browser",
-					"options": {
-						"outputPath": "dist/mfe-profile",
-						"index": "projects/mfe-profile/src/index.html",
-						"main": "projects/mfe-profile/src/main.ts",
-						"polyfills": "projects/mfe-profile/src/polyfills.ts",
-						"tsConfig": "projects/mfe-profile/tsconfig.app.json",
-						"assets": [
-							"projects/mfe-profile/src/favicon.ico",
-							"projects/mfe-profile/src/assets"
-						],
-						"styles": [
-							"projects/mfe-profile/src/styles.css"
-						],
-						"scripts": [],
-						"extraWebpackConfig": "projects/mfe-profile/webpack.config.js",
-						"commonChunk": false
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"fileReplacements": [
-								{
-									"replace": "projects/mfe-profile/src/environments/environment.ts",
-									"with": "projects/mfe-profile/src/environments/environment.prod.ts"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/mfe-profile/webpack.prod.config.js"
-						},
-						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"vendorChunk": true,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"browserTarget": "mfe-profile:build:production",
-							"extraWebpackConfig": "projects/mfe-profile/webpack.prod.config.js"
-						},
-						"development": {
-							"browserTarget": "mfe-profile:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4202,
-						"publicHost": "http://localhost:4202",
-						"extraWebpackConfig": "projects/mfe-profile/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
-					"options": {
-						"browserTarget": "mfe-profile:build",
-						"extraWebpackConfig": "projects/mfe-profile/webpack.config.js"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/mfe-profile/src/test.ts",
-						"polyfills": "projects/mfe-profile/src/polyfills.ts",
-						"tsConfig": "projects/mfe-profile/tsconfig.spec.json",
-						"karmaConfig": "projects/mfe-profile/karma.conf.js",
-						"assets": [
-							"projects/mfe-profile/src/favicon.ico",
-							"projects/mfe-profile/src/assets"
-						],
-						"styles": [
-							"projects/mfe-profile/src/styles.css"
-						],
-						"scripts": []
-					}
-				}
-			}
-		},
-		"mfe-account": {
-			"projectType": "application",
-			"schematics": {
-				"@schematics/angular:component": {
-					"style": "scss",
-					"skipTests": true
-				},
-				"@schematics/angular:class": {
-					"skipTests": true
-				},
-				"@schematics/angular:directive": {
-					"skipTests": true
-				},
-				"@schematics/angular:guard": {
-					"skipTests": true
-				},
-				"@schematics/angular:interceptor": {
-					"skipTests": true
-				},
-				"@schematics/angular:pipe": {
-					"skipTests": true
-				},
-				"@schematics/angular:resolver": {
-					"skipTests": true
-				},
-				"@schematics/angular:service": {
-					"skipTests": true
-				}
-			},
-			"root": "projects/mfe-account",
-			"sourceRoot": "projects/mfe-account/src",
-			"prefix": "app",
-			"architect": {
-				"build": {
-					"builder": "ngx-build-plus:browser",
-					"options": {
-						"outputPath": "dist/mfe-account",
-						"index": "projects/mfe-account/src/index.html",
-						"main": "projects/mfe-account/src/main.ts",
-						"polyfills": "projects/mfe-account/src/polyfills.ts",
-						"tsConfig": "projects/mfe-account/tsconfig.app.json",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mfe-account/src/favicon.ico",
-							"projects/mfe-account/src/assets"
-						],
-						"styles": [
-							"projects/mfe-account/src/styles.scss"
-						],
-						"scripts": [],
-						"extraWebpackConfig": "projects/mfe-account/webpack.config.js",
-						"commonChunk": false
-					},
-					"configurations": {
-						"production": {
-							"budgets": [
-								{
-									"type": "initial",
-									"maximumWarning": "500kb",
-									"maximumError": "1mb"
-								},
-								{
-									"type": "anyComponentStyle",
-									"maximumWarning": "2kb",
-									"maximumError": "4kb"
-								}
-							],
-							"fileReplacements": [
-								{
-									"replace": "projects/mfe-account/src/environments/environment.ts",
-									"with": "projects/mfe-account/src/environments/environment.prod.ts"
-								}
-							],
-							"outputHashing": "all",
-							"extraWebpackConfig": "projects/mfe-account/webpack.prod.config.js"
-						},
-						"development": {
-							"buildOptimizer": false,
-							"optimization": false,
-							"vendorChunk": true,
-							"extractLicenses": false,
-							"sourceMap": true,
-							"namedChunks": true
-						}
-					},
-					"defaultConfiguration": "production"
-				},
-				"serve": {
-					"builder": "ngx-build-plus:dev-server",
-					"configurations": {
-						"production": {
-							"browserTarget": "mfe-account:build:production",
-							"extraWebpackConfig": "projects/mfe-account/webpack.prod.config.js"
-						},
-						"development": {
-							"browserTarget": "mfe-account:build:development"
-						}
-					},
-					"defaultConfiguration": "development",
-					"options": {
-						"port": 4203,
-						"publicHost": "http://localhost:4203",
-						"extraWebpackConfig": "projects/mfe-account/webpack.config.js"
-					}
-				},
-				"extract-i18n": {
-					"builder": "ngx-build-plus:extract-i18n",
-					"options": {
-						"browserTarget": "mfe-account:build",
-						"extraWebpackConfig": "projects/mfe-account/webpack.config.js"
-					}
-				},
-				"test": {
-					"builder": "@angular-devkit/build-angular:karma",
-					"options": {
-						"main": "projects/mfe-account/src/test.ts",
-						"polyfills": "projects/mfe-account/src/polyfills.ts",
-						"tsConfig": "projects/mfe-account/tsconfig.spec.json",
-						"karmaConfig": "projects/mfe-account/karma.conf.js",
-						"inlineStyleLanguage": "scss",
-						"assets": [
-							"projects/mfe-account/src/favicon.ico",
-							"projects/mfe-account/src/assets"
-						],
-						"styles": [
-							"projects/mfe-account/src/styles.scss"
-						],
-						"scripts": []
-					}
-				}
-			}
-		}
-	}
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": false
+  },
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "shell": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineStyle": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/shell",
+      "sourceRoot": "projects/shell/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/shell",
+            "index": "projects/shell/src/index.html",
+            "main": "projects/shell/src/main.ts",
+            "polyfills": "projects/shell/src/polyfills.ts",
+            "tsConfig": "projects/shell/tsconfig.app.json",
+            "assets": [
+              "projects/shell/src/favicon.ico",
+              "projects/shell/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ],
+            "extraWebpackConfig": "projects/shell/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/shell/src/environments/environment.ts",
+                  "with": "projects/shell/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/shell/webpack.prod.config.js"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "shell:build:production",
+              "extraWebpackConfig": "projects/shell/webpack.prod.config.js"
+            },
+            "development": {
+              "browserTarget": "shell:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4200,
+            "publicHost": "http://localhost:4200",
+            "extraWebpackConfig": "projects/shell/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "browserTarget": "shell:build",
+            "extraWebpackConfig": "projects/shell/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/shell/src/test.ts",
+            "polyfills": "projects/shell/src/polyfills.ts",
+            "tsConfig": "projects/shell/tsconfig.spec.json",
+            "karmaConfig": "projects/shell/karma.conf.js",
+            "assets": [
+              "projects/shell/src/favicon.ico",
+              "projects/shell/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ]
+          }
+        }
+      }
+    },
+    "shared": {
+      "projectType": "library",
+      "root": "projects/shared",
+      "sourceRoot": "projects/shared/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/shared/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/shared/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/shared/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/shared/src/test.ts",
+            "tsConfig": "projects/shared/tsconfig.spec.json",
+            "karmaConfig": "projects/shared/karma.conf.js"
+          }
+        }
+      }
+    },
+    "mfe-chat": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineStyle": true,
+          "style": "css",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/mfe-chat",
+      "sourceRoot": "projects/mfe-chat/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/mfe-chat",
+            "index": "projects/mfe-chat/src/index.html",
+            "main": "projects/mfe-chat/src/main.ts",
+            "polyfills": "projects/mfe-chat/src/polyfills.ts",
+            "tsConfig": "projects/mfe-chat/tsconfig.app.json",
+            "inlineStyleLanguage": "css",
+            "assets": [
+              "projects/mfe-chat/src/favicon.ico",
+              "projects/mfe-chat/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ],
+            "extraWebpackConfig": "projects/mfe-chat/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/mfe-chat/src/environments/environment.ts",
+                  "with": "projects/mfe-chat/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/mfe-chat/webpack.prod.config.js"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "mfe-chat:build:production",
+              "extraWebpackConfig": "projects/mfe-chat/webpack.prod.config.js"
+            },
+            "development": {
+              "browserTarget": "mfe-chat:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4201,
+            "publicHost": "http://localhost:4201",
+            "extraWebpackConfig": "projects/mfe-chat/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "browserTarget": "mfe-chat:build",
+            "extraWebpackConfig": "projects/mfe-chat/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mfe-chat/src/test.ts",
+            "polyfills": "projects/mfe-chat/src/polyfills.ts",
+            "tsConfig": "projects/mfe-chat/tsconfig.spec.json",
+            "karmaConfig": "projects/mfe-chat/karma.conf.js",
+            "inlineStyleLanguage": "css",
+            "assets": [
+              "projects/mfe-chat/src/favicon.ico",
+              "projects/mfe-chat/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ]
+          }
+        }
+      }
+    },
+    "mfe-profile": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "inlineStyle": true,
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        },
+        "@schematics/angular:application": {
+          "strict": true
+        }
+      },
+      "root": "projects/mfe-profile",
+      "sourceRoot": "projects/mfe-profile/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/mfe-profile",
+            "index": "projects/mfe-profile/src/index.html",
+            "main": "projects/mfe-profile/src/main.ts",
+            "polyfills": "projects/mfe-profile/src/polyfills.ts",
+            "tsConfig": "projects/mfe-profile/tsconfig.app.json",
+            "assets": [
+              "projects/mfe-profile/src/favicon.ico",
+              "projects/mfe-profile/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ],
+            "extraWebpackConfig": "projects/mfe-profile/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/mfe-profile/src/environments/environment.ts",
+                  "with": "projects/mfe-profile/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/mfe-profile/webpack.prod.config.js"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "mfe-profile:build:production",
+              "extraWebpackConfig": "projects/mfe-profile/webpack.prod.config.js"
+            },
+            "development": {
+              "browserTarget": "mfe-profile:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4202,
+            "publicHost": "http://localhost:4202",
+            "extraWebpackConfig": "projects/mfe-profile/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "browserTarget": "mfe-profile:build",
+            "extraWebpackConfig": "projects/mfe-profile/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mfe-profile/src/test.ts",
+            "polyfills": "projects/mfe-profile/src/polyfills.ts",
+            "tsConfig": "projects/mfe-profile/tsconfig.spec.json",
+            "karmaConfig": "projects/mfe-profile/karma.conf.js",
+            "assets": [
+              "projects/mfe-profile/src/favicon.ico",
+              "projects/mfe-profile/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ]
+          }
+        }
+      }
+    },
+    "mfe-account": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "css",
+          "skipTests": true
+        },
+        "@schematics/angular:class": {
+          "skipTests": true
+        },
+        "@schematics/angular:directive": {
+          "skipTests": true
+        },
+        "@schematics/angular:guard": {
+          "skipTests": true
+        },
+        "@schematics/angular:interceptor": {
+          "skipTests": true
+        },
+        "@schematics/angular:pipe": {
+          "skipTests": true
+        },
+        "@schematics/angular:resolver": {
+          "skipTests": true
+        },
+        "@schematics/angular:service": {
+          "skipTests": true
+        }
+      },
+      "root": "projects/mfe-account",
+      "sourceRoot": "projects/mfe-account/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "ngx-build-plus:browser",
+          "options": {
+            "outputPath": "dist/mfe-account",
+            "index": "projects/mfe-account/src/index.html",
+            "main": "projects/mfe-account/src/main.ts",
+            "polyfills": "projects/mfe-account/src/polyfills.ts",
+            "tsConfig": "projects/mfe-account/tsconfig.app.json",
+            "inlineStyleLanguage": "css",
+            "assets": [
+              "projects/mfe-account/src/favicon.ico",
+              "projects/mfe-account/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ],
+            "extraWebpackConfig": "projects/mfe-account/webpack.config.js",
+            "commonChunk": false
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "projects/mfe-account/src/environments/environment.ts",
+                  "with": "projects/mfe-account/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all",
+              "extraWebpackConfig": "projects/mfe-account/webpack.prod.config.js"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "ngx-build-plus:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "mfe-account:build:production",
+              "extraWebpackConfig": "projects/mfe-account/webpack.prod.config.js"
+            },
+            "development": {
+              "browserTarget": "mfe-account:build:development"
+            }
+          },
+          "defaultConfiguration": "development",
+          "options": {
+            "port": 4203,
+            "publicHost": "http://localhost:4203",
+            "extraWebpackConfig": "projects/mfe-account/webpack.config.js"
+          }
+        },
+        "extract-i18n": {
+          "builder": "ngx-build-plus:extract-i18n",
+          "options": {
+            "browserTarget": "mfe-account:build",
+            "extraWebpackConfig": "projects/mfe-account/webpack.config.js"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/mfe-account/src/test.ts",
+            "polyfills": "projects/mfe-account/src/polyfills.ts",
+            "tsConfig": "projects/mfe-account/tsconfig.spec.json",
+            "karmaConfig": "projects/mfe-account/karma.conf.js",
+            "inlineStyleLanguage": "css",
+            "assets": [
+              "projects/mfe-account/src/favicon.ico",
+              "projects/mfe-account/src/assets"
+            ],
+            "styles": [
+              "dist/css/adminlte.css",
+              "dist/plugins/fontawesome-free/css/all.min.css",
+              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
+              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
+              "dist/plugins/jqvmap/jqvmap.min.css",
+              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
+              "dist/plugins/daterangepicker/daterangepicker.css",
+              "dist/plugins/summernote/summernote-bs4.min.css"
+            ],
+            "scripts": [
+              "dist/js/adminlte.js",
+              "dist/js/demo.js",
+              "dist/js/pages/dashboard.js",
+              "dist/plugins/jquery/jquery.min.js",
+              "dist/plugins/jquery-ui/jquery-ui.min.js",
+              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "dist/plugins/chart.js/Chart.min.js",
+              "dist/plugins/sparklines/sparkline.js",
+              "dist/plugins/jqvmap/jquery.vmap.min.js",
+              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
+              "dist/plugins/jquery-knob/jquery.knob.min.js",
+              "dist/plugins/moment/moment.min.js",
+              "dist/plugins/daterangepicker/daterangepicker.js",
+              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
+              "dist/plugins/summernote/summernote-bs4.min.js",
+              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
+            ]
+          }
+        }
+      }
+    }
+  }
 }
