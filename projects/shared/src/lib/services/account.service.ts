@@ -1,10 +1,10 @@
 import { Router } from '@angular/router';
 import { map } from 'rxjs/operators';
-import { IUser } from './../shared/models/user';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of, ReplaySubject } from 'rxjs';
+import { of, ReplaySubject } from 'rxjs';
+import { IUser } from '../models/user';
+import { environment } from 'projects/shell/src/environments/environment';
 
 
 @Injectable({
