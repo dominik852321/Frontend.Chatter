@@ -8,6 +8,8 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
+  public userIsLogged = false;
+
   constructor() { }
 
 

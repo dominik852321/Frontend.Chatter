@@ -5,3 +5,10 @@
 export * from './lib/products.service';
 export * from './lib/product';
 export * from './lib/basket.service';
+
+// new components
+
+// new services
+export * from './lib/services/account.service';
+
+// new guards
