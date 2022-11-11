@@ -11,11 +11,10 @@ import { environment } from 'projects/shell/src/environments/environment';
   providedIn: 'root'
 })
 export class AccountService {
-  baseUrl = environment.apiUrl;
 
+  public baseUrl = environment.apiUrl + "auth/";
   private currentUserSource = new ReplaySubject<IUser>(1);
-  currentUser$ = this.currentUserSource.asObservable();
-
+  public currentUser$ = this.currentUserSource.asObservable();
   public email: string = "";
 
   constructor(private http: HttpClient, private router: Router) { }
@@ -40,7 +39,7 @@ export class AccountService {
   }
 
   public login(values: any) {
-    return this.http.post<IUser>(this.baseUrl + 'account/login', values).pipe(
+    return this.http.post<IUser>(this.baseUrl + 'login', values).pipe(
       map((user: IUser) => {
         localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
@@ -49,7 +48,7 @@ export class AccountService {
   }
 
   public register(values: any) {
-    return this.http.post<IUser>(this.baseUrl + 'account/register', values).pipe(
+    return this.http.post<IUser>(this.baseUrl + 'register', values).pipe(
       map((user: IUser) => {
         localStorage.setItem('token', user.token);
         this.currentUserSource.next(user);
@@ -61,10 +60,6 @@ export class AccountService {
     localStorage.removeItem('token');
     this.currentUserSource.next(null);
     this.router.navigateByUrl('/');
-  }
-
-  public checkEmailExists(email: string) {
-    return this.http.get(this.baseUrl + 'account/emailexists?email=' + email);
   }
 
   public getCurrentUserEmail() {

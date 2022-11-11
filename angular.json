@@ -56,6 +56,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -157,6 +159,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -267,6 +271,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -369,6 +375,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -449,6 +457,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -550,6 +560,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -628,6 +640,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
@@ -730,6 +744,8 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "node_modules/ngx-toastr/toastr.css",
+              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
               "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
               "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",

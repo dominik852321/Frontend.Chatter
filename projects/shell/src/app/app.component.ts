@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { AccountService } from '@shared';
+import { IUser } from 'projects/shared/src/lib/models/user';
+import { Observable } from 'rxjs';
 
 
 @Component({
@@ -8,9 +11,20 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
 
-  public userIsLogged = false;
+  public currentUser$: Observable<IUser>;
 
-  constructor() { }
+  constructor(private accountService: AccountService) { }
 
+  public ngOnInit(): void {
+   this.loadCurrentUser();
+  }
 
+  public loadCurrentUser() {
+    const token = localStorage.getItem('token');
+    this.accountService.loadCurrentUser(token).subscribe(() => {
+        console.log('loaded user');
+      }, error => {
+        console.log(error);
+      });
+  }
 }

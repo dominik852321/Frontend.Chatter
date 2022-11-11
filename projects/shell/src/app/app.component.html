@@ -1,9 +1,13 @@
-<ng-container *ngIf="userIsLogged">
+<ng-container *ngIf="(currentUser$ | async) !== null">
     <app-top-navbar></app-top-navbar>
 </ng-container>
+
 <router-outlet></router-outlet>
 
-<ng-container *ngIf="userIsLogged">
+<ng-container *ngIf="(currentUser$ | async) !== null">
     <app-footer></app-footer>
 </ng-container>
+
+
+
 
