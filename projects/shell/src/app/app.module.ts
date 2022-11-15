@@ -9,13 +9,11 @@ import { LoadingInterceptor } from "projects/shared/src/lib/interceptors/loading
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { FooterComponent } from "./layout/footer/footer.component";
-import { HomeComponent } from "./layout/home/home.component";
 import { TopNavbarComponent } from "./layout/top-navbar/top-navbar.component";
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     TopNavbarComponent,
     FooterComponent,
   ],

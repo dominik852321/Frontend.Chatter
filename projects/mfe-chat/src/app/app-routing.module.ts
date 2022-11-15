@@ -1,10 +1,16 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from "@angular/core";
+import { RouterModule, Routes } from "@angular/router";
 
-const routes: Routes = [{ path: 'chat', loadChildren: () => import('./chat/chat.module').then(m => m.ChatModule) }];
+const routes: Routes = [
+  { path: "", redirectTo: "chat" },
+  {
+    path: "chat",
+    loadChildren: () => import("./chat/chat.module").then((m) => m.ChatModule),
+  },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}
