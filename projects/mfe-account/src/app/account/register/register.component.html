@@ -6,9 +6,9 @@
       </div>
       <div class="card-body">
 
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form [formGroup]="registerForm" (ngSubmit)="onRegisterSubmit()">
           <div class="input-group mb-3">
-            <input  type="text" class="form-control" placeholder="Nazwa użytkownika"  formControlName="userName">
+            <input  type="text" class="form-control" placeholder="User name"  formControlName="userName">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-user"></span>
@@ -24,7 +24,7 @@
             </div>
           </div>
           <div class="input-group mb-3">
-            <input type="password" class="form-control" placeholder="Hasło" formControlName="password">
+            <input type="password" class="form-control" placeholder="Password" formControlName="password">
             <div class="input-group-append">
               <div class="input-group-text">
                 <span class="fas fa-lock"></span>
@@ -33,12 +33,12 @@
           </div>
 
           <div class="col-5 mx-auto my-4">
-            <button type="submit" class="btn btn-primary btn-block">Zarejestruj</button>
+            <button type="submit" class="btn btn-primary btn-block">Register</button>
           </div>
         </form>
 
         <div class="text-center">
-          <a href="account/login">Mam już konto!</a>
+          <a href="account/login">I already have account</a>
         </div>
       </div>
     </div>

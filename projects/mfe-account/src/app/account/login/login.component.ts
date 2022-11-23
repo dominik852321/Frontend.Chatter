@@ -1,8 +1,10 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { ActivatedRoute, Router } from "@angular/router";
-import { AccountService } from "@shared";
+import { Router } from "@angular/router";
+import { AuthService, UserService } from "@shared";
 import { ToastrService } from "ngx-toastr";
+import { JWTToken } from "projects/shared/src/lib/models/jwt-token";
+import { catchError, of } from "rxjs";
 
 @Component({
   selector: "app-login",
@@ -13,16 +15,36 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
 
   constructor(
-    private accountService: AccountService,
+    private authService: AuthService,
+    private userService: UserService,
     private router: Router,
-    private toastr: ToastrService,
+    private toastr: ToastrService
   ) {}
 
   public ngOnInit(): void {
     this.createLoginForm();
   }
 
-  public createLoginForm() {
+  public onLoginSubmit(): void {
+    this.authService
+      .login(this.loginForm.value)
+      .pipe(
+        catchError((error) => {
+          this.toastr.error("Wrong email or password");
+          return of(error);
+        })
+      )
+      .subscribe((token: JWTToken) => {
+        if (token?.jwtToken !== undefined && token?.jwtToken !== "") {
+          this.userService.getCurrentUser().subscribe((_) => {
+            this.router.navigateByUrl("chat");
+            this.toastr.success("Logged succesful");
+          });
+        }
+      });
+  }
+
+  private createLoginForm(): void {
     this.loginForm = new FormGroup({
       email: new FormControl("", [
         Validators.required,
@@ -30,18 +52,5 @@ export class LoginComponent implements OnInit {
       ]),
       password: new FormControl("", Validators.required),
     });
-  }
-
-  public onSubmit() {
-    this.accountService.login(this.loginForm.value).subscribe(
-      () => {
-        this.router.navigateByUrl("/");
-        this.toastr.success('Zalogowano pomyślnie');
-      },
-      (error) => {
-        this.toastr.error('Błędne dane');
-        console.log(error);
-      }
-    );
   }
 }

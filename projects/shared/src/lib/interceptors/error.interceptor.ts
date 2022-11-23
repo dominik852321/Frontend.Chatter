@@ -15,21 +15,15 @@ export class ErrorInterceptor implements HttpInterceptor {
             catchError(error => {
                 if (error) {
                     if(error.status === 400){
-                        console.log(error.error.message, error.error.statusCode);
+                        console.log(error);
                     }
                     if(error.status === 401){
-                        if(error.error.message == "Authorized, you are not")
-                        {
-                            localStorage.removeItem('token');
-                            console.log(error.error.message, error.error.statusCode);
-                        }
-                        else
-                        {
-                            console.log(error.error.message, error.error.statusCode);
-                        }
+                            localStorage.removeItem('jwtToken');
+                            console.log(error);
                     }
                     if(error.status === 404) {
                         this.router.navigateByUrl('/not-found');
+                        console.log(error);
                     }
                     if(error.status === 500) {
                         const navigationExtras: NavigationExtras = {state: {error: error.error}};

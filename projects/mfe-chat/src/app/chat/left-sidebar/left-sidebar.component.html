@@ -1,58 +1,18 @@
 <aside class="main-sidebar sidebar-dark-primary ">
-  
-    <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-    
-
-      <!-- SidebarSearch Form -->
-      <div class="form-inline mt-3 pb-3 mb-3">
-        <div class="input-group" data-widget="sidebar-search">
-          <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
-          <div class="input-group-append">
-            <button class="btn btn-sidebar">
-              <i class="fas fa-search fa-fw"></i>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
+      <nav class="mt-4">
           <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <!-- Add icons to the links using the .nav-icon class
-                       with font-awesome or any other icon font library -->
-              <li class="nav-item menu-open">
+              <li *ngFor="let friends of currentUserFriends$ | async; index as i" class="nav-item menu-open">
                   <ul class="nav nav-treeview">
                       <li class="nav-item">
-                          <a href="./index.html" class="nav-link active">
+                          <a href="" class="nav-link">
                               <img class="direct-leftsidebar-img" src="../assets/img/user1-128x128.jpg" alt="message user image">
-                              <p class="ml-2">Hubert Jakubski</p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="./index2.html" class="nav-link">
-                              <img class="direct-leftsidebar-img" src="../assets/img/user5-128x128.jpg" alt="message user image">
-                              <p class="ml-2">Janina Samborska</p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="./index3.html" class="nav-link">
-                              <img class="direct-leftsidebar-img" src="../assets/img/user3-128x128.jpg" alt="message user image">
-                              <p class="ml-2">Wiktoria Ostak</p>
-                          </a>
-                      </li>
-                      <li class="nav-item">
-                          <a href="./index3.html" class="nav-link">
-                              <img class="direct-leftsidebar-img" src="../assets/img/user4-128x128.jpg" alt="message user image">
-                              <p class="ml-2">Anna Echimov</p>
+                              <p class="ml-2">{{ friends.userName }}</p>
                           </a>
                       </li>
                   </ul>
               </li>
           </ul>
       </nav>
-      <!-- /.sidebar-menu -->
     </div>
-    <!-- /.sidebar -->
   </aside>

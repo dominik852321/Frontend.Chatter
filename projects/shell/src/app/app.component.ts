@@ -1,30 +1,38 @@
-import { Component } from '@angular/core';
-import { AccountService } from '@shared';
-import { IUser } from 'projects/shared/src/lib/models/user';
-import { Observable } from 'rxjs';
-
+import { Component } from "@angular/core";
+import { Router } from "@angular/router";
+import { User, UserService } from "@shared";
+import { ToastrService } from "ngx-toastr";
+import { catchError, Observable, of } from "rxjs";
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styles: []
+  selector: "app-root",
+  templateUrl: "./app.component.html",
+  styles: [],
 })
 export class AppComponent {
+  public currentUser$: Observable<User>;
 
-  public currentUser$: Observable<IUser>;
-
-  constructor(private accountService: AccountService) { }
+  constructor(private userService: UserService, private toastr: ToastrService, private router: Router) {}
 
   public ngOnInit(): void {
-   this.loadCurrentUser();
+    this.loadCurrentUser();
   }
 
   public loadCurrentUser() {
-    const token = localStorage.getItem('token');
-    this.accountService.loadCurrentUser(token).subscribe(() => {
-        console.log('loaded user');
-      }, error => {
-        console.log(error);
+    this.userService
+      .getCurrentUser()
+      .pipe(
+        catchError((error) => {
+          if(error.status === 401){
+            this.router.navigateByUrl('account/login');
+            return of();
+          }
+          this.toastr.error("Problem on API side");
+          return of(error);
+        })
+      )
+      .subscribe((_) => {
+        this.currentUser$ = this.userService.currentUser$;
       });
   }
 }

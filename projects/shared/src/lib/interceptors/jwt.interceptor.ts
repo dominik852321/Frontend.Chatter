@@ -5,12 +5,12 @@ import { Injectable } from '@angular/core';
 @Injectable()
 export class JwtInterceptor implements HttpInterceptor {
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const token = localStorage.getItem('token');
+        const jwtToken = localStorage.getItem('jwtToken');
 
-        if (token) {
+        if (jwtToken) {
             req = req.clone({
                 setHeaders: {
-                    Authorization: `Bearer ${token}`
+                    Authorization: `Bearer ${jwtToken}`
                 }
             });
         }

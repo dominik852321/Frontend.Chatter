@@ -5,7 +5,6 @@ import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './chat.component';
 import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
 
-
 @NgModule({
   declarations: [
     ChatComponent,
@@ -13,7 +12,7 @@ import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
   ],
   imports: [
     CommonModule,
-    ChatRoutingModule
+    ChatRoutingModule,
   ]
 })
 export class ChatModule { }

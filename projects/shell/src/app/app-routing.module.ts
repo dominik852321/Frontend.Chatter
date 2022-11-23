@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from 'projects/shared/src/lib/guard/auth.guard';
+import { AuthGuard } from '@shared';
 
 const routes: Routes = [
   { path: '', redirectTo: 'chat' },
