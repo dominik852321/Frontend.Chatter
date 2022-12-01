@@ -5,7 +5,6 @@ import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { SharedModule } from "@shared";
 import { ErrorInterceptor } from "projects/shared/src/lib/interceptors/error.interceptor";
 import { JwtInterceptor } from "projects/shared/src/lib/interceptors/jwt.interceptor";
-import { LoadingInterceptor } from "projects/shared/src/lib/interceptors/loading.interceptor";
 import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 import { FooterComponent } from "./layout/footer/footer.component";
@@ -18,15 +17,14 @@ import { TopNavbarComponent } from "./layout/top-navbar/top-navbar.component";
         FooterComponent,
     ],
     imports: [
-        BrowserModule,
         AppRoutingModule,
+        BrowserModule,
         BrowserAnimationsModule,
         HttpClientModule,
-        SharedModule
+        SharedModule,
     ],
     providers: [
         { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-        { provide: HTTP_INTERCEPTORS, useClass: LoadingInterceptor, multi: true },
         { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     ],
     bootstrap: [AppComponent]

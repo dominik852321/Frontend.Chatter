@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import {
   FormBuilder,
@@ -30,26 +31,22 @@ export class RegisterComponent implements OnInit {
   }
 
   public onRegisterSubmit() {
-    if (this.registerForm.valid) {
-      this.authService
-        .register(this.registerForm.value)
-        .pipe(
-          catchError((error) => {
-            this.toastr.error("Problem on API side");
-            return of(error);
-          })
-        )
-        .subscribe((token: JWTToken) => {
-          if (token?.jwtToken !== undefined && token?.jwtToken !== "") {
-            this.userService.getCurrentUser().subscribe((_) => {
-              this.router.navigateByUrl("");
-              this.toastr.success("Register succesful");
+    this.authService
+      .register(this.registerForm.value)
+      .pipe(
+        catchError((response: HttpErrorResponse) => {
+          this.toastr.error(response.error.message);
+          return of(response);
+        })
+      )
+      .subscribe((token: JWTToken) => {
+        if (token?.jwtToken !== undefined && token?.jwtToken !== "") {
+          this.userService.getCurrentUser().subscribe((_) => {
+            this.router.navigateByUrl("");
+            this.toastr.success("Register succesful");
           });
-          }
-        });
-    } else {
-      this.toastr.error("Wrong email or password");
-    }
+        }
+      });
   }
 
   private createRegisterForm() {
@@ -59,12 +56,7 @@ export class RegisterComponent implements OnInit {
         Validators.required,
         Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"),
       ]),
-      password: new FormControl(null, [
-        Validators.required,
-        Validators.pattern(
-          "(?=^.{6,10}$)(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#$%^&amp;*()_+}{&quot;:;?/&gt;.&lt;,])(?!.*\\s).*$"
-        ),
-      ]),
+      password: new FormControl(null, [Validators.required]),
     });
   }
 }

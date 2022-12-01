@@ -1,18 +1,24 @@
-<aside class="main-sidebar sidebar-dark-primary ">
-    <div class="sidebar">
-      <nav class="mt-4">
-          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-              <li *ngFor="let friends of currentUserFriends$ | async; index as i" class="nav-item menu-open">
-                  <ul class="nav nav-treeview">
-                      <li class="nav-item">
-                          <a href="" class="nav-link">
-                              <img class="direct-leftsidebar-img" src="../assets/img/user1-128x128.jpg" alt="message user image">
-                              <p class="ml-2">{{ friends.userName }}</p>
-                          </a>
-                      </li>
-                  </ul>
-              </li>
-          </ul>
-      </nav>
-    </div>
-  </aside>
+<div class="wrapper">
+    <aside class="main-sidebar sidebar-dark-primary ">
+        <div class="sidebar">
+            <nav class="mt-4">
+                <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                    data-accordion="false">
+                    <li *ngFor="let friend of currentUserFriends$ | async; index as i" class="nav-item menu-open">
+                        <ul class="nav nav-treeview" >
+                            <li class="nav-item">
+                                <a class="nav-link" (click)="onSelectFriend(friend)">
+                                    <img class="direct-leftsidebar-img" src="../assets/img/user1-128x128.jpg"
+                                        alt="message user image">
+                                    <p class="ml-2">{{ friend.userName }}</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </aside>
+    <app-chat #chat [currentUser$]="currentUser$" [currentRoomId]="currentRoomId"></app-chat>
+</div>
+

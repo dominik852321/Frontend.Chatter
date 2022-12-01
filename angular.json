@@ -56,6 +56,7 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
@@ -159,6 +160,7 @@
             ],
             "styles": [
               "dist/css/adminlte.css",
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
               "node_modules/ngx-toastr/toastr.css",
               "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
               "dist/plugins/fontawesome-free/css/all.min.css",
@@ -266,38 +268,10 @@
             "tsConfig": "projects/mfe-chat/tsconfig.app.json",
             "inlineStyleLanguage": "css",
             "assets": [
-              "projects/mfe-chat/src/favicon.ico",
-              "projects/mfe-chat/src/assets"
             ],
             "styles": [
-              "dist/css/adminlte.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "dist/plugins/fontawesome-free/css/all.min.css",
-              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
-              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-              "dist/plugins/jqvmap/jqvmap.min.css",
-              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-              "dist/plugins/daterangepicker/daterangepicker.css",
-              "dist/plugins/summernote/summernote-bs4.min.css"
             ],
             "scripts": [
-              "dist/js/adminlte.js",
-              "dist/js/demo.js",
-              "dist/js/pages/dashboard.js",
-              "dist/plugins/jquery/jquery.min.js",
-              "dist/plugins/jquery-ui/jquery-ui.min.js",
-              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "dist/plugins/chart.js/Chart.min.js",
-              "dist/plugins/sparklines/sparkline.js",
-              "dist/plugins/jqvmap/jquery.vmap.min.js",
-              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
-              "dist/plugins/jquery-knob/jquery.knob.min.js",
-              "dist/plugins/moment/moment.min.js",
-              "dist/plugins/daterangepicker/daterangepicker.js",
-              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-              "dist/plugins/summernote/summernote-bs4.min.js",
-              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
             ],
             "extraWebpackConfig": "projects/mfe-chat/webpack.config.js",
             "commonChunk": false
@@ -370,38 +344,10 @@
             "karmaConfig": "projects/mfe-chat/karma.conf.js",
             "inlineStyleLanguage": "css",
             "assets": [
-              "projects/mfe-chat/src/favicon.ico",
-              "projects/mfe-chat/src/assets"
             ],
             "styles": [
-              "dist/css/adminlte.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "dist/plugins/fontawesome-free/css/all.min.css",
-              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
-              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-              "dist/plugins/jqvmap/jqvmap.min.css",
-              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-              "dist/plugins/daterangepicker/daterangepicker.css",
-              "dist/plugins/summernote/summernote-bs4.min.css"
             ],
             "scripts": [
-              "dist/js/adminlte.js",
-              "dist/js/demo.js",
-              "dist/js/pages/dashboard.js",
-              "dist/plugins/jquery/jquery.min.js",
-              "dist/plugins/jquery-ui/jquery-ui.min.js",
-              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "dist/plugins/chart.js/Chart.min.js",
-              "dist/plugins/sparklines/sparkline.js",
-              "dist/plugins/jqvmap/jquery.vmap.min.js",
-              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
-              "dist/plugins/jquery-knob/jquery.knob.min.js",
-              "dist/plugins/moment/moment.min.js",
-              "dist/plugins/daterangepicker/daterangepicker.js",
-              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-              "dist/plugins/summernote/summernote-bs4.min.js",
-              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
             ]
           }
         }
@@ -452,38 +398,10 @@
             "polyfills": "projects/mfe-profile/src/polyfills.ts",
             "tsConfig": "projects/mfe-profile/tsconfig.app.json",
             "assets": [
-              "projects/mfe-profile/src/favicon.ico",
-              "projects/mfe-profile/src/assets"
             ],
             "styles": [
-              "dist/css/adminlte.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "dist/plugins/fontawesome-free/css/all.min.css",
-              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
-              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-              "dist/plugins/jqvmap/jqvmap.min.css",
-              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-              "dist/plugins/daterangepicker/daterangepicker.css",
-              "dist/plugins/summernote/summernote-bs4.min.css"
             ],
             "scripts": [
-              "dist/js/adminlte.js",
-              "dist/js/demo.js",
-              "dist/js/pages/dashboard.js",
-              "dist/plugins/jquery/jquery.min.js",
-              "dist/plugins/jquery-ui/jquery-ui.min.js",
-              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "dist/plugins/chart.js/Chart.min.js",
-              "dist/plugins/sparklines/sparkline.js",
-              "dist/plugins/jqvmap/jquery.vmap.min.js",
-              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
-              "dist/plugins/jquery-knob/jquery.knob.min.js",
-              "dist/plugins/moment/moment.min.js",
-              "dist/plugins/daterangepicker/daterangepicker.js",
-              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-              "dist/plugins/summernote/summernote-bs4.min.js",
-              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
             ],
             "extraWebpackConfig": "projects/mfe-profile/webpack.config.js",
             "commonChunk": false
@@ -555,38 +473,10 @@
             "tsConfig": "projects/mfe-profile/tsconfig.spec.json",
             "karmaConfig": "projects/mfe-profile/karma.conf.js",
             "assets": [
-              "projects/mfe-profile/src/favicon.ico",
-              "projects/mfe-profile/src/assets"
             ],
             "styles": [
-              "dist/css/adminlte.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "dist/plugins/fontawesome-free/css/all.min.css",
-              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
-              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-              "dist/plugins/jqvmap/jqvmap.min.css",
-              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-              "dist/plugins/daterangepicker/daterangepicker.css",
-              "dist/plugins/summernote/summernote-bs4.min.css"
             ],
             "scripts": [
-              "dist/js/adminlte.js",
-              "dist/js/demo.js",
-              "dist/js/pages/dashboard.js",
-              "dist/plugins/jquery/jquery.min.js",
-              "dist/plugins/jquery-ui/jquery-ui.min.js",
-              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "dist/plugins/chart.js/Chart.min.js",
-              "dist/plugins/sparklines/sparkline.js",
-              "dist/plugins/jqvmap/jquery.vmap.min.js",
-              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
-              "dist/plugins/jquery-knob/jquery.knob.min.js",
-              "dist/plugins/moment/moment.min.js",
-              "dist/plugins/daterangepicker/daterangepicker.js",
-              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-              "dist/plugins/summernote/summernote-bs4.min.js",
-              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
             ]
           }
         }
@@ -635,38 +525,10 @@
             "tsConfig": "projects/mfe-account/tsconfig.app.json",
             "inlineStyleLanguage": "css",
             "assets": [
-              "projects/mfe-account/src/favicon.ico",
-              "projects/mfe-account/src/assets"
             ],
             "styles": [
-              "dist/css/adminlte.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "dist/plugins/fontawesome-free/css/all.min.css",
-              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
-              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-              "dist/plugins/jqvmap/jqvmap.min.css",
-              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-              "dist/plugins/daterangepicker/daterangepicker.css",
-              "dist/plugins/summernote/summernote-bs4.min.css"
             ],
             "scripts": [
-              "dist/js/adminlte.js",
-              "dist/js/demo.js",
-              "dist/js/pages/dashboard.js",
-              "dist/plugins/jquery/jquery.min.js",
-              "dist/plugins/jquery-ui/jquery-ui.min.js",
-              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "dist/plugins/chart.js/Chart.min.js",
-              "dist/plugins/sparklines/sparkline.js",
-              "dist/plugins/jqvmap/jquery.vmap.min.js",
-              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
-              "dist/plugins/jquery-knob/jquery.knob.min.js",
-              "dist/plugins/moment/moment.min.js",
-              "dist/plugins/daterangepicker/daterangepicker.js",
-              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-              "dist/plugins/summernote/summernote-bs4.min.js",
-              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
             ],
             "extraWebpackConfig": "projects/mfe-account/webpack.config.js",
             "commonChunk": false
@@ -739,38 +601,10 @@
             "karmaConfig": "projects/mfe-account/karma.conf.js",
             "inlineStyleLanguage": "css",
             "assets": [
-              "projects/mfe-account/src/favicon.ico",
-              "projects/mfe-account/src/assets"
             ],
             "styles": [
-              "dist/css/adminlte.css",
-              "node_modules/ngx-toastr/toastr.css",
-              "node_modules/ngx-spinner/animations/ball-scale-multiple.css",
-              "dist/plugins/fontawesome-free/css/all.min.css",
-              "dist/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css",
-              "dist/plugins/icheck-bootstrap/icheck-bootstrap.min.css",
-              "dist/plugins/jqvmap/jqvmap.min.css",
-              "dist/plugins/overlayScrollbars/css/OverlayScrollbars.min.css",
-              "dist/plugins/daterangepicker/daterangepicker.css",
-              "dist/plugins/summernote/summernote-bs4.min.css"
             ],
             "scripts": [
-              "dist/js/adminlte.js",
-              "dist/js/demo.js",
-              "dist/js/pages/dashboard.js",
-              "dist/plugins/jquery/jquery.min.js",
-              "dist/plugins/jquery-ui/jquery-ui.min.js",
-              "dist/plugins/bootstrap/js/bootstrap.bundle.min.js",
-              "dist/plugins/chart.js/Chart.min.js",
-              "dist/plugins/sparklines/sparkline.js",
-              "dist/plugins/jqvmap/jquery.vmap.min.js",
-              "dist/plugins/jqvmap/maps/jquery.vmap.usa.js",
-              "dist/plugins/jquery-knob/jquery.knob.min.js",
-              "dist/plugins/moment/moment.min.js",
-              "dist/plugins/daterangepicker/daterangepicker.js",
-              "dist/plugins/tempusdominus-bootstrap-4/js/tempusdominus-bootstrap-4.min.js",
-              "dist/plugins/summernote/summernote-bs4.min.js",
-              "dist/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"
             ]
           }
         }

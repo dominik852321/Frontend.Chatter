@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
@@ -29,9 +30,9 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.loginForm.value)
       .pipe(
-        catchError((error) => {
-          this.toastr.error("Wrong email or password");
-          return of(error);
+        catchError((response: HttpErrorResponse) => {
+          this.toastr.error(response.error.message);
+          return of(response);
         })
       )
       .subscribe((token: JWTToken) => {

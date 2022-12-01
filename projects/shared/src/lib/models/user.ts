@@ -15,13 +15,13 @@ export class Friend {
 }
 
 export class FriendRequest {
-  id: string
-  senderId: string
-  recipientId: string
-  isAccepted: boolean
-  dateTime: string
+  id: string;
+  senderId: string;
+  senderUserName: string;
+  recipientId: string;
+  isAccepted: boolean;
+  dateTime: string;
 }
-
 
 export class UserProfile {
   id: string;

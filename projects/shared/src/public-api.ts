@@ -4,13 +4,14 @@
 
 // new components
 export * from './lib/components/find-friends/find-friends.component';
+export * from './lib/components/list-invite/list-invite.component';
 
 // new services
 export * from './lib/services/auth.service';
 export * from './lib/services/profile.service';
 export * from './lib/services/user.service';
 export * from './lib/services/chat.service';
-export * from './lib/services/signalR.service';
+export * from './lib/services/signalr.service';
 
 // new guards
 export * from './lib/guard/auth.guard';
@@ -26,3 +27,4 @@ export * from './lib/interceptors/loading.interceptor';
 
 // new modules 
 export * from './lib/shared.module';
+export * from './lib/material.module';

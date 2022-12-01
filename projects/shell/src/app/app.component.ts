@@ -23,10 +23,6 @@ export class AppComponent {
       .getCurrentUser()
       .pipe(
         catchError((error) => {
-          if(error.status === 401){
-            this.router.navigateByUrl('account/login');
-            return of();
-          }
           this.toastr.error("Problem on API side");
           return of(error);
         })

@@ -1,9 +1,5 @@
 import { Injectable } from "@angular/core";
-import {
-  CanActivate,
-  Router,
-  UrlTree,
-} from "@angular/router";
+import { CanActivate, Router, UrlTree } from "@angular/router";
 import { map, Observable } from "rxjs";
 import { UserService } from "../services/user.service";
 
@@ -22,10 +18,9 @@ export class AuthGuard implements CanActivate {
       map((user) => {
         if (user) {
           return true;
-        } else {
-          this.router.navigate(["account/login"]);
-          return false;
         }
+        this.router.navigateByUrl("account/login");
+        return false;
       })
     );
   }
