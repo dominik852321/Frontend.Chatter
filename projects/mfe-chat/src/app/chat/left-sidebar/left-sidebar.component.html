@@ -4,10 +4,10 @@
             <nav class="mt-4">
                 <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                     data-accordion="false">
-                    <li *ngFor="let friend of currentUserFriends$ | async; index as i" class="nav-item menu-open">
+                    <li *ngFor="let friend of (currentUser$ | async).friends" class="nav-item menu-open">
                         <ul class="nav nav-treeview" >
                             <li class="nav-item">
-                                <a class="nav-link" (click)="onSelectFriend(friend)">
+                                <a role="button" class="nav-link" [ngClass]="this.currentRoomId === friend.roomId ? 'active': ''" (click)="onSelectFriend(friend)">
                                     <img class="direct-leftsidebar-img" src="../assets/img/user1-128x128.jpg"
                                         alt="message user image">
                                     <p class="ml-2">{{ friend.userName }}</p>
@@ -19,6 +19,8 @@
             </nav>
         </div>
     </aside>
-    <app-chat #chat [currentUser$]="currentUser$" [currentRoomId]="currentRoomId"></app-chat>
+    <ng-container *ngIf="currentRoomId">
+        <app-chat [currentUser]="(currentUser$ | async)" [currentRoomId]="currentRoomId"></app-chat>
+    </ng-container>
 </div>
 

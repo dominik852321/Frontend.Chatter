@@ -1,7 +1,6 @@
 import { ChangeDetectorRef, Component, OnInit } from "@angular/core";
-import { FriendRequest, User, UserService } from "@shared";
+import { AcceptFriendForm, FriendRequest, User, UserService } from "@shared";
 import { map, Observable, tap } from "rxjs";
-import { AcceptFriendForm } from "../../models/Dtos/accept-friend-dto";
 
 @Component({
   selector: "lib-list-invite",
@@ -12,7 +11,6 @@ export class ListInviteComponent implements OnInit {
 
   public currentUser: User;
   public currentFriendRequests: FriendRequest[];
-  private acceptFriendForm: AcceptFriendForm;
 
   constructor(private userService: UserService) {}
 
@@ -33,9 +31,9 @@ export class ListInviteComponent implements OnInit {
   }
 
   public acceptFriend(id: string) {
-    this.acceptFriendForm = {} as AcceptFriendForm;
-    this.acceptFriendForm.requestId = id;
-    this.userService.acceptFriend(this.acceptFriendForm).subscribe((_) => {
+    const acceptFriendForm = {} as AcceptFriendForm;
+    acceptFriendForm.requestId = id;
+    this.userService.acceptFriend(acceptFriendForm).subscribe((_) => {
       this.userService.getCurrentUser().subscribe();
     });
   }

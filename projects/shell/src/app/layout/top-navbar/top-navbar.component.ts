@@ -7,7 +7,7 @@ import { map, Observable } from "rxjs";
 @Component({
   selector: "app-top-navbar",
   templateUrl: "./top-navbar.component.html",
-  styles: [".navbar { height: 10vh !important; z-index: 1}"],
+  styles: [".navbar { height: 70px; z-index: 1}"],
 })
 export class TopNavbarComponent implements OnInit {
   public currentUserName$: Observable<string>;

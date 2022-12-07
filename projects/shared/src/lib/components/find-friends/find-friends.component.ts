@@ -1,9 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
+import { FriendRequestForm, User, UserService } from "@shared";
 import { map, Observable, startWith, tap } from "rxjs";
-import { FriendRequestForm } from "../../models/Dtos/friend-request-dto";
-import { User } from "../../models/user";
-import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "lib-find-friends",
@@ -19,7 +17,6 @@ export class FindFriendsComponent implements OnInit {
   private currentUser: User;
   public friendsOptions$: Observable<User[]>;
 
-  private friendRequestForm: FriendRequestForm;
 
   constructor(private userService: UserService) {}
 
@@ -43,9 +40,9 @@ export class FindFriendsComponent implements OnInit {
   }
 
   public addFriend(id: string) {
-    this.friendRequestForm = {} as FriendRequestForm;
-    this.friendRequestForm.userId = id;
-    this.userService.addUser(this.friendRequestForm).subscribe();
+    const friendRequestForm = {} as FriendRequestForm;
+    friendRequestForm.userId = id;
+    this.userService.addUser(friendRequestForm).subscribe();
   }
 
   private getFriendByName(name: string): void {

@@ -2,9 +2,8 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from "@angular/router";
-import { AuthService, UserService } from "@shared";
+import { AuthService, JWTToken, UserService } from "@shared";
 import { ToastrService } from "ngx-toastr";
-import { JWTToken } from "projects/shared/src/lib/models/jwt-token";
 import { catchError, of } from "rxjs";
 
 @Component({

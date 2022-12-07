@@ -1,42 +1,39 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { ReplaySubject } from 'rxjs';
+import { Message, Room } from '@shared';
+import { environment } from 'projects/shell/src/environments/environment';
+import { map, Observable, ReplaySubject } from 'rxjs';
 
 @Injectable()
 export class ChatService {
 
-  // private currentUserSource = new ReplaySubject<User>(1);
-  // public currentUser$ = this.currentUserSource.asObservable();
+  private baseUrl = environment.apiUrl + "chat/";
   
-  // constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
-  // public getCurrentUser(): Observable<any> {
-  //   const jwtToken = localStorage.getItem("jwtToken");
-  //   if (jwtToken === null) {
-  //     this.currentUserSource.next(null);
-  //     return of(null);
-  //   }
-    
-  //   return this.http
-  //     .get<User>(this.baseUrl + "getCurrentUser")
-  //     .pipe(
-  //       map((user: User) => {
-  //         if (user) {
-  //           this.currentUserSource.next(user);
-  //         }
-  //       })
-  //     );
-  // }
+  public getMessages(roomId: string, page: number = 1): Observable<Message[]> {
+    const params = new HttpParams().set("roomId", roomId).set("page", page);
+    return this.http.get<Message[]>(this.baseUrl + "getMessages", { params }).pipe(
+      map((message: Message[]) => {
+        if (message) {
+          return message;
+        }
+        return null;
+      })
+    );
+  }
 
-  // public getCurrentUserFriends(): Observable<any> {
-  //   return this.http
-  //   .get<User>(this.baseUrl + "getFriends")
-  //   .pipe(
-  //    // To Do
-  //   );
-  // }
-
-  
+  public getRoom(roomId: string): Observable<Room> {
+    const params = new HttpParams().set("roomId", roomId);
+    return this.http.get<Room>(this.baseUrl + "getRoom", { params }).pipe(
+      map((room: Room) => {
+        if (room) {
+          return room;
+        }
+        return null;
+      })
+    );
+  }
 }
 
 

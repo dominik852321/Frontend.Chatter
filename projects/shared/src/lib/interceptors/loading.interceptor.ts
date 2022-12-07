@@ -1,15 +1,14 @@
 import { from, Observable } from 'rxjs';
 import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { BusyService } from '../services/busy.service';
 import { Injectable } from '@angular/core';
 import { delay, finalize } from 'rxjs/operators';
+import { BusyService } from '@shared';
 
 
 
 
 @Injectable()
 export class LoadingInterceptor implements HttpInterceptor {
-
     constructor(private busyService: BusyService) {}
 
     public intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {

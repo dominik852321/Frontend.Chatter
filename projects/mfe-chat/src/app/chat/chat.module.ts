@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { ChatRoutingModule } from './chat-routing.module';
 import { ChatComponent } from './chat/chat.component';
 import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,8 @@ import { LeftSidebarComponent } from './left-sidebar/left-sidebar.component';
   imports: [
     CommonModule,
     ChatRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
   ]
 })
 export class ChatModule { }

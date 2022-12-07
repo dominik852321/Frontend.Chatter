@@ -5,6 +5,7 @@ export class User {
   status: number;
   friends: Array<Friend>;
   friendRequests: Array<FriendRequest>;
+  profilePictureUrl: string;
 }
 
 export class Friend {
@@ -12,25 +13,14 @@ export class Friend {
   userName: string;
   roomId: string;
   status: number;
+  profilePictureUrl: string;
 }
 
 export class FriendRequest {
   id: string;
   senderId: string;
-  senderUserName: string;
+  senderUsername: string;
   recipientId: string;
   isAccepted: boolean;
   dateTime: string;
-}
-
-export class UserProfile {
-  id: string;
-  photoUrl: string;
-  userName: string;
-  email: string;
-  profession: string;
-  education: string;
-  location: string;
-  skills: string;
-  notes: string;
 }

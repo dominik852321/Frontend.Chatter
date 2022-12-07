@@ -2,20 +2,17 @@ import { catchError, map } from "rxjs/operators";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, ReplaySubject } from "rxjs";
-import { User } from "../models/user";
 import { environment } from "projects/shell/src/environments/environment";
-import { Router } from "@angular/router";
-import { FriendRequestForm } from "../models/Dtos/friend-request-dto";
-import { AcceptFriendForm } from "../models/Dtos/accept-friend-dto";
+import { AcceptFriendForm, FriendRequestForm, User, UserPasswordChange, UserPhoto, UserProfile } from "@shared";
 
 @Injectable()
 export class UserService {
-  public baseUrl = environment.apiUrl + "user/";
+  private baseUrl = environment.apiUrl + "user/";
 
   private currentUserSource = new ReplaySubject<User>(1);
   public currentUser$ = this.currentUserSource.asObservable();
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient) {}
 
   public getCurrentUser(): Observable<any> {
     const jwtToken = localStorage.getItem("jwtToken");
@@ -42,15 +39,26 @@ export class UserService {
   }
 
   public addUser(friendRequestForm: FriendRequestForm): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "createFriendRequest", friendRequestForm);
+    return this.http.post<any>(
+      this.baseUrl + "createFriendRequest",
+      friendRequestForm
+    );
   }
 
-  public acceptFriend(acceptFriendForm: AcceptFriendForm): Observable<any>{
+  public acceptFriend(acceptFriendForm: AcceptFriendForm): Observable<any> {
     return this.http.post<any>(this.baseUrl + "acceptFriend", acceptFriendForm);
   }
 
-  public getUserById(id:string): Observable<User> {
-    return this.http.get<User>(this.baseUrl + `${id}` );
+  public updateUserProfile(userProfile: UserProfile): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "updateProfile", userProfile);
+  }
+
+  public updateUserPassword(userPassword: UserPasswordChange): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "updateUserPassword", userPassword);
+  }
+
+  public updateUserPhoto(userPhoto: UserPhoto): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "updateProfilePicture", userPhoto);
   }
 
   public logoutCurrentUser(): void {

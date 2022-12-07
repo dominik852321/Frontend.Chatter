@@ -1,16 +1,9 @@
 import { NgModule } from "@angular/core";
-import { ToastrModule } from "ngx-toastr";
-import { FindFriendsComponent } from "./components/find-friends/find-friends.component";
-import { AuthService } from "./services/auth.service";
-import { ChatService } from "./services/chat.service";
-import { ProfileService } from "./services/profile.service";
-import { SignalrService } from "./services/signalr.service";
-import { UserService } from "./services/user.service";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { MaterialModule } from "./material.module";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { BrowserModule } from "@angular/platform-browser";
-import { ListInviteComponent } from './components/list-invite/list-invite.component';
+import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { AuthService, ChatService, FindFriendsComponent, ListInviteComponent, MaterialModule, SignalrService, UserService } from "@shared";
+import { ToastrModule } from "ngx-toastr";
 
 @NgModule({
   declarations: [FindFriendsComponent, ListInviteComponent],
@@ -28,7 +21,6 @@ import { ListInviteComponent } from './components/list-invite/list-invite.compon
   providers: [
     AuthService,
     ChatService,
-    ProfileService,
     SignalrService,
     UserService,
   ],

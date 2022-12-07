@@ -1,10 +1,9 @@
-import {
-  Component,
-  OnInit,
-} from "@angular/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, OnInit } from "@angular/core";
 import { FormControl, FormGroup, Validators } from "@angular/forms";
-import { UserService, ProfileService, UserProfile, User } from "@shared";
+import { UserService, User, UserProfile, UserPhoto, UserPasswordChange } from "@shared";
 import { ToastrService } from "ngx-toastr";
+import { catchError, of } from "rxjs";
 
 @Component({
   selector: "app-profile",
@@ -12,86 +11,91 @@ import { ToastrService } from "ngx-toastr";
   styles: [],
 })
 export class ProfileComponent implements OnInit {
-  public profileForm: FormGroup;
-  public currentProfile: UserProfile = new UserProfile();
+  public updateProfileForm: FormGroup;
+  public currentUser: User;
 
   constructor(
     private userService: UserService,
-    private profileService: ProfileService,
     private toastr: ToastrService
   ) {}
 
   public ngOnInit(): void {
-    this.createProfileForm();
     this.userService.currentUser$.subscribe((user: User) => {
       if (user) {
-        this.getProfile(user);
+        this.currentUser = user;
+        this.createProfileForm();
       }
     });
-    this.profileForm.get("userName").valueChanges.subscribe((userName) => {
-      this.currentProfile.userName = userName;
-    });
-    this.profileForm.get("profession").valueChanges.subscribe((profession) => {
-      this.currentProfile.profession = profession;
-    });
   }
 
-  public onUpdate() {
-    let newProfile = new UserProfile();
-    newProfile.id = this.currentProfile.id;
-    newProfile.userName = this.getControlValue("userName");
-    newProfile.email = this.getControlValue("email");
-    newProfile.profession = this.getControlValue("profession");
-    newProfile.education = this.getControlValue("education");
-    newProfile.location = this.getControlValue("location");
-    newProfile.skills = this.getControlValue("skills");
-    newProfile.notes = this.getControlValue("notes");
+  public onUpdateProfile() {
+    const newProfileInformation = {} as UserProfile;
+    newProfileInformation.id = this.currentUser.id;
+    newProfileInformation.userName = this.updateProfileForm.get('userName').value;
 
-    if (this.profileForm.valid) {
-      this.profileService.updateProfile(newProfile).subscribe(
-        (res) => this.toastr.success("Update user is complete!"),
-        (err) => this.toastr.error("Error with update user")
-      );
-    }
+    this.userService
+      .updateUserProfile(newProfileInformation)
+      .pipe(
+        catchError((response: HttpErrorResponse) => {
+          this.toastr.error(response.error.message);
+          return of(response);
+        })
+      )
+      .subscribe((_) => {
+        this.userService.getCurrentUser().subscribe();
+        this.toastr.success("Update user is complete!");
+      });
   }
 
-  private fillForm(user: UserProfile): void {
-    this.profileForm.patchValue({
-      userName: user.userName,
-      profession: user.profession,
-      email: user.email,
-      education: user.education,
-      location: user.location,
-      skills: user.skills,
-      notes: user.notes,
-    });
+  public onUpdatePassword() {
+    const newUserPassword = {} as UserPasswordChange;
+    newUserPassword.id = this.currentUser.id;
+    newUserPassword.currentPassword = this.getValueForm('currentPassword').value;
+    newUserPassword.newPassword = this.getValueForm('newPassword').value;
+    newUserPassword.newPasswordConfirm = this.getValueForm('newPasswordConfirm').value;
+
+    this.userService
+      .updateUserPassword(newUserPassword)
+      .pipe(
+        catchError((response: HttpErrorResponse) => {
+          this.toastr.error(response.error.message);
+          return of(response);
+        })
+      )
+      .subscribe((_) => {
+        this.toastr.success("Update password is changed!");
+      });
   }
 
-  private getControlValue(control: string) {
-    return this.profileForm.get(control).value;
-  }
+  public onUpdatePhoto() {
+    const newUserPhoto = {} as UserPhoto;
+    newUserPhoto.id = this.currentUser.id;
+    newUserPhoto.photo = this.getValueForm('photo').value;
 
-  private getProfile(user: User){
-    this.profileService.getProfile(user.id).subscribe((profile) => {
-      this.currentProfile = profile;
-      if (this.currentProfile) {
-        this.fillForm(this.currentProfile);
-      }
-    });
+    this.userService
+      .updateUserPhoto(newUserPhoto)
+      .pipe(
+        catchError((response: HttpErrorResponse) => {
+          this.toastr.error(response.error.message);
+          return of(response);
+        })
+      )
+      .subscribe((_) => {
+        this.toastr.success("Update password is changed!");
+      });
   }
 
   private createProfileForm() {
-    this.profileForm = new FormGroup({
-      userName: new FormControl("", Validators.required),
-      profession: new FormControl("", Validators.required),
-      email: new FormControl("", [
-        Validators.required,
-        Validators.pattern("^[\\w-\\.]+@([\\w-]+\\.)+[\\w-]{2,4}$"),
-      ]),
-      education: new FormControl("", Validators.required),
-      location: new FormControl("", Validators.required),
-      skills: new FormControl("", Validators.required),
-      notes: new FormControl("", Validators.required),
+    this.updateProfileForm = new FormGroup({
+      userName: new FormControl(this.currentUser.userName, Validators.required),
+      photo: new FormControl("" , Validators.required),
+      currentPassword: new FormControl("", Validators.required),
+      newPassword: new FormControl("", Validators.required),
+      confirmNewPassword: new FormControl("", Validators.required),
     });
+  }
+
+  private getValueForm(formControl: string) {
+    return this.updateProfileForm.get(formControl).value;
   }
 }
