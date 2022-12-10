@@ -6,10 +6,8 @@
                     <div class="card card-primary card-outline row align-items-end"
                         style="flex-direction: inherit!important">
                         <div class="card-body h-100 box-profile">
-                            <div class="text-center">
-                                <img class="profile-user-img img-fluid img-circle"
-                                    src="../../assets/img/user4-128x128.jpg" alt="User profile picture">
-                            </div>
+
+                            <lib-update-photo [currentUserId]="currentUser?.id"></lib-update-photo>
 
                             <ul class="list-group list-group-unbordered mb-3">
                                 <strong>User name</strong>
@@ -20,11 +18,10 @@
                                 <strong>Email</strong>
                                 <div class="my-2">
                                     <input disabled type="email" class="form-control form-control-border"
-                                        value="{{ currentUser.email }}" placeholder="Email">
+                                        value="{{ currentUser?.email }}" placeholder="Email">
                                 </div>
                             </ul>
                         </div>
-
                         <div class="col-12 p-2">
                             <button type="submit" class="btn btn-primary btn-block">Edit</button>
                         </div>
@@ -39,12 +36,12 @@
                             <ul class="list-group list-group-unbordered mb-3">
                                 <strong>Current password</strong>
                                 <div class="my-2">
-                                    <input type="password"  class="form-control form-control-border"
+                                    <input type="password" class="form-control form-control-border"
                                         formControlName="currentPassword">
                                 </div>
                                 <strong>New password</strong>
                                 <div class="my-2">
-                                    <input type="password"  class="form-control form-control-border"
+                                    <input type="password" class="form-control form-control-border"
                                         formControlName="newPassword">
                                 </div>
                                 <strong>Confirm new password</strong>

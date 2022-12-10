@@ -1,7 +1,9 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { FriendRequestForm, User, UserService } from "@shared";
 import { map, Observable, startWith, tap } from "rxjs";
+import { FriendRequestForm } from "../../models/Dtos/friend-request-dto";
+import { User } from "../../models/user";
+import { UserService } from "../../services/user.service";
 
 @Component({
   selector: "lib-find-friends",

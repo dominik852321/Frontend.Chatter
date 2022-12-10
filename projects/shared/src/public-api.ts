@@ -5,6 +5,7 @@
 // new components
 export * from "./lib/components/find-friends/find-friends.component";
 export * from "./lib/components/list-invite/list-invite.component";
+export * from "./lib/components/update-photo/update-photo.component";
 
 // new services
 export * from "./lib/services/auth.service";

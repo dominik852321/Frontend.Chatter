@@ -3,7 +3,12 @@ import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of, ReplaySubject } from "rxjs";
 import { environment } from "projects/shell/src/environments/environment";
-import { AcceptFriendForm, FriendRequestForm, User, UserPasswordChange, UserPhoto, UserProfile } from "@shared";
+import { User } from "../models/user";
+import { FriendRequestForm } from "../models/Dtos/friend-request-dto";
+import { AcceptFriendForm } from "../models/Dtos/accept-friend-dto";
+import { UserProfile } from "../models/Dtos/user-profile-dto";
+import { UserPasswordChange } from "../models/Dtos/user-password-change";
+import { UserPhoto } from "../models/Dtos/user-photo-dto";
 
 @Injectable()
 export class UserService {

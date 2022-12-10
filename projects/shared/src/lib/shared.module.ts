@@ -1,29 +1,38 @@
 import { NgModule } from "@angular/core";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { AuthService, ChatService, FindFriendsComponent, ListInviteComponent, MaterialModule, SignalrService, UserService } from "@shared";
 import { ToastrModule } from "ngx-toastr";
+import { FindFriendsComponent } from "./components/find-friends/find-friends.component";
+import { ListInviteComponent } from "./components/list-invite/list-invite.component";
+import { MaterialModule } from "./material.module";
+import { AuthService } from "./services/auth.service";
+import { ChatService } from "./services/chat.service";
+import { SignalrService } from "./services/signalr.service";
+import { UserService } from "./services/user.service";
+import { UpdatePhotoComponent } from "./components/update-photo/update-photo.component";
+import { CommonModule } from "@angular/common";
 
 @NgModule({
-  declarations: [FindFriendsComponent, ListInviteComponent],
+  declarations: [
+    FindFriendsComponent,
+    ListInviteComponent,
+    UpdatePhotoComponent,
+  ],
   imports: [
     ToastrModule.forRoot({
       positionClass: "toast-bottom-right",
       preventDuplicates: true,
     }),
-    BrowserModule,
-    BrowserAnimationsModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    MaterialModule
+    MaterialModule,
   ],
-  providers: [
-    AuthService,
-    ChatService,
-    SignalrService,
-    UserService,
+  providers: [AuthService, ChatService, SignalrService, UserService],
+  exports: [
+    FindFriendsComponent,
+    ListInviteComponent,
+    UpdatePhotoComponent,
+    ToastrModule,
   ],
-  exports: [FindFriendsComponent, ListInviteComponent, ToastrModule],
 })
 export class SharedModule {}

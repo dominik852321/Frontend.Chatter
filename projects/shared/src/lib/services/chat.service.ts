@@ -1,8 +1,8 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Message, Room } from '@shared';
 import { environment } from 'projects/shell/src/environments/environment';
 import { map, Observable, ReplaySubject } from 'rxjs';
+import { Message, Room } from '../models/message';
 
 @Injectable()
 export class ChatService {
