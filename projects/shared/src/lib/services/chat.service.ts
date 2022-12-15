@@ -4,7 +4,9 @@ import { environment } from 'projects/shell/src/environments/environment';
 import { map, Observable, ReplaySubject } from 'rxjs';
 import { Message, Room } from '../models/message';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class ChatService {
 
   private baseUrl = environment.apiUrl + "chat/";

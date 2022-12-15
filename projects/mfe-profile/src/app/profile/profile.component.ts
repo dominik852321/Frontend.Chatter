@@ -1,14 +1,20 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, OnInit } from "@angular/core";
+import { Component, ElementRef, OnInit, ViewChild } from "@angular/core";
 import {
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from "@angular/forms";
-import { UserService, User, UserProfile, UserPasswordChange } from "@shared";
+import {
+  UserService,
+  User,
+  ChangeUserName,
+  UserPasswordChange,
+  AuthService,
+} from "@shared";
 import { ToastrService } from "ngx-toastr";
-import { catchError, of } from "rxjs";
+import { catchError, finalize, map, Observable, of, tap } from "rxjs";
 
 @Component({
   selector: "app-profile",
@@ -16,16 +22,18 @@ import { catchError, of } from "rxjs";
   styles: [],
 })
 export class ProfileComponent implements OnInit {
-  public updateProfileForm: FormGroup;
-  public currentUser: User;
+  public updatePasswordForm: FormGroup;
+  public currentUser$: Observable<User>;
+
+  @ViewChild("userName") userName: ElementRef;
 
   constructor(
     private userService: UserService,
     private toastr: ToastrService,
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private authService: AuthService
   ) {
-    this.updateProfileForm = this.fb.group({
-      userName: ["", Validators.required],
+    this.updatePasswordForm = this.fb.group({
       currentPassword: ["", Validators.required],
       newPassword: ["", Validators.required],
       newPasswordConfirm: ["", Validators.required],
@@ -33,25 +41,23 @@ export class ProfileComponent implements OnInit {
   }
 
   public ngOnInit(): void {
-    // this.userService.currentUser$.subscribe((user: User) => {
-    //   this.currentUser = user;
-    //   this.fillProfileForm();
-    // });
-
-    //? not working
+    this.currentUser$ = this.userService.currentUser$;
   }
 
   public onUpdateProfile() {
-    const newProfileInformation = {} as UserProfile;
-    newProfileInformation.id = this.currentUser.id;
-    newProfileInformation.userName =
-      this.updateProfileForm.get("userName").value;
+    const userName = this.userName.nativeElement.value;
+    if (userName.length === 0) {
+      this.toastr.error("Please fill user name");
+      return;
+    }
+    const changeUserName = {} as ChangeUserName;
+    changeUserName.userName = userName;
 
     this.userService
-      .updateUserProfile(newProfileInformation)
+      .updateUserProfile(changeUserName)
       .pipe(
         catchError((response: HttpErrorResponse) => {
-          this.toastr.error(response.error.message);
+          this.toastr.error("Problem with update");
           return of(response);
         })
       )
@@ -62,32 +68,29 @@ export class ProfileComponent implements OnInit {
   }
 
   public onUpdatePassword() {
+    if (this.updatePasswordForm.invalid) {
+      this.toastr.error("Please fill all fields");
+      return;
+    }
     const newUserPassword = {} as UserPasswordChange;
-    newUserPassword.id = this.currentUser.id;
     newUserPassword.currentPassword =
-      this.getValueForm("currentPassword").value;
-    newUserPassword.newPassword = this.getValueForm("newPassword").value;
+      this.updatePasswordForm.get("currentPassword").value;
+    newUserPassword.newPassword =
+      this.updatePasswordForm.get("newPassword").value;
     newUserPassword.newPasswordConfirm =
-      this.getValueForm("newPasswordConfirm").value;
+      this.updatePasswordForm.get("newPasswordConfirm").value;
 
-    this.userService
+    this.authService
       .updateUserPassword(newUserPassword)
       .pipe(
         catchError((response: HttpErrorResponse) => {
-          this.toastr.error(response.error.message);
+          this.toastr.error(response?.error?.message);
           return of(response);
         })
       )
       .subscribe((_) => {
-        this.toastr.success("Update password is changed!");
+        this.userService.getCurrentUser().subscribe();
+        this.toastr.success("Password was changed");
       });
-  }
-
-  private fillProfileForm() {
-    this.updateProfileForm.setControl(this.currentUser.userName, "userName");
-  }
-
-  private getValueForm(formControl: string) {
-    return this.updateProfileForm.get(formControl).value;
   }
 }

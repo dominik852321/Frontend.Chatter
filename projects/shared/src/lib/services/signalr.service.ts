@@ -4,7 +4,9 @@ import { environment } from "projects/shell/src/environments/environment";
 import { BehaviorSubject, ReplaySubject } from "rxjs";
 import { Message } from "../models/message";
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class SignalrService {
   private baseUrl = environment.apiUrl + "chathub";
   private hubConnection: signalR.HubConnection;

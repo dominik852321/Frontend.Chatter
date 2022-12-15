@@ -20,6 +20,7 @@ export class FriendRequest {
   id: string;
   senderId: string;
   senderUsername: string;
+  senderProfilePictureUrl: string;
   recipientId: string;
   isAccepted: boolean;
   dateTime: string;

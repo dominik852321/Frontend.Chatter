@@ -2,7 +2,15 @@ import { Component } from "@angular/core";
 import { Router } from "@angular/router";
 import { User, UserService } from "@shared";
 import { ToastrService } from "ngx-toastr";
-import { catchError, Observable, of } from "rxjs";
+import {
+  catchError,
+  exhaustMap,
+  fromEvent,
+  interval,
+  Observable,
+  of,
+  take,
+} from "rxjs";
 
 @Component({
   selector: "app-root",
@@ -12,7 +20,11 @@ import { catchError, Observable, of } from "rxjs";
 export class AppComponent {
   public currentUser$: Observable<User>;
 
-  constructor(private userService: UserService, private toastr: ToastrService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private toastr: ToastrService,
+    private router: Router
+  ) {}
 
   public ngOnInit(): void {
     this.loadCurrentUser();
@@ -24,6 +36,7 @@ export class AppComponent {
       .pipe(
         catchError((error) => {
           this.toastr.error("Problem on API side");
+          localStorage.removeItem("jwtToken");
           return of(error);
         })
       )

@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit } from "@angular/core";
+import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ChatService, Message, Room, SignalrService, User } from "@shared";
 import { catchError, forkJoin, map, Observable, of, Subscription } from "rxjs";
@@ -11,6 +11,7 @@ import { catchError, forkJoin, map, Observable, of, Subscription } from "rxjs";
 export class ChatComponent implements OnChanges {
   @Input() public currentUser: User;
   @Input() public currentRoomId: string;
+
 
   public newMessage = new FormControl<string>("");
   public currentRoom: Room;
@@ -48,7 +49,7 @@ export class ChatComponent implements OnChanges {
         return user?.userName;
       }
       case "photo": {
-        return "";
+        return user?.profilePictureUrl ? user?.profilePictureUrl : "../../assets/img/default-photo.png";
       }
       default: {
         return "";

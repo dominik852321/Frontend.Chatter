@@ -36,7 +36,8 @@ export class LoginComponent implements OnInit {
       )
       .subscribe((token: JWTToken) => {
         if (token?.jwtToken !== undefined && token?.jwtToken !== "") {
-          this.userService.getCurrentUser().subscribe((_) => {
+          this.userService.getCurrentUser()
+          .subscribe((_) => {
             this.router.navigateByUrl("chat");
             this.toastr.success("Logged succesful");
           });

@@ -4,10 +4,6 @@ import { ToastrModule } from "ngx-toastr";
 import { FindFriendsComponent } from "./components/find-friends/find-friends.component";
 import { ListInviteComponent } from "./components/list-invite/list-invite.component";
 import { MaterialModule } from "./material.module";
-import { AuthService } from "./services/auth.service";
-import { ChatService } from "./services/chat.service";
-import { SignalrService } from "./services/signalr.service";
-import { UserService } from "./services/user.service";
 import { UpdatePhotoComponent } from "./components/update-photo/update-photo.component";
 import { CommonModule } from "@angular/common";
 
@@ -27,7 +23,7 @@ import { CommonModule } from "@angular/common";
     ReactiveFormsModule,
     MaterialModule,
   ],
-  providers: [AuthService, ChatService, SignalrService, UserService],
+  // providers: [AuthService, ChatService, SignalrService, UserService],
   exports: [
     FindFriendsComponent,
     ListInviteComponent,

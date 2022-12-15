@@ -18,9 +18,8 @@ export * from "./lib/services/busy.service";
 export * from "./lib/guard/auth.guard";
 
 // new dtos
-export * from "./lib/models/Dtos/user-profile-dto";
+export * from "./lib/models/Dtos/change-user-name";
 export * from "./lib/models/Dtos/user-password-change";
-export * from "./lib/models/Dtos/user-photo-dto";
 export * from "./lib/models/Dtos/accept-friend-dto";
 export * from "./lib/models/Dtos/friend-request-dto";
 

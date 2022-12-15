@@ -8,26 +8,28 @@ import { map, Observable, tap } from "rxjs";
   styles: [""],
 })
 export class ListInviteComponent implements OnInit {
-
-  public currentUser: User;
-  public currentFriendRequests: FriendRequest[];
+  public currentFriendRequests$: Observable<FriendRequest[]>;
 
   constructor(private userService: UserService) {}
 
   public ngOnInit(): void {
-    this.userService.currentUser$.subscribe((user: User) =>{
-        this.currentUser = user;
-        this.currentFriendRequests = user.friendRequests.filter((x) => x.isAccepted !== true && 
-        x.senderId !== user.id);
-      }
+    this.currentFriendRequests$ = this.userService.currentUser$.pipe(
+      map((user: User) =>
+        user.friendRequests.filter(
+          (x) => x.isAccepted !== true && x.senderId !== user.id
+        )
+      )
     );
   }
 
   public howLongAgo(dateTime: string): string {
-    const howLong = new Date(
-      new Date().getTime() - new Date(dateTime).getTime()
-    ).getHours() - 1;
-    return howLong.toString();
+    const requestDate = new Date(dateTime);
+    const currentDate = new Date(new Date().toISOString());
+
+    var diff = (currentDate.getTime() - requestDate.getTime()) / 1000;
+    diff /= 60 * 60;
+
+    return Math.abs(Math.round(diff)).toString();
   }
 
   public acceptFriend(id: string) {

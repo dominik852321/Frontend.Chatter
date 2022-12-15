@@ -1,23 +1,25 @@
 <li class="nav-item dropdown">
   <a class="nav-link" data-toggle="dropdown" href="#">
     <i class="far fa-bell"></i>
-    <span *ngIf="currentFriendRequests?.length > 0" class="badge badge-warning navbar-badge">{{
-      currentFriendRequests?.length }}</span>
+    <span *ngIf="(currentFriendRequests$ | async)?.length > 0" class="badge badge-warning navbar-badge">{{
+      (currentFriendRequests$ | async).length}}</span>
   </a>
-  <div
-    class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-    <ng-container *ngIf="currentFriendRequests?.length > 0; else noFriendRequests">
-      <ng-container *ngFor="let friendRequest of currentFriendRequests;">
+  <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
+    <ng-container *ngIf="(currentFriendRequests$ | async)?.length > 0; else noFriendRequests">
+      <ng-container *ngFor="let friendRequest of currentFriendRequests$ | async">
         <div class="dropdown-item">
           <div class="row media">
             <div class="col-3">
-              <img src="../assets/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
+              <img
+                src="{{ friendRequest.senderProfilePictureUrl ? friendRequest.senderProfilePictureUrl : '../../assets/img/default-photo.png'}}"
+                alt="User Avatar" class="img-size-50 img-circle mr-3">
             </div>
             <div class="col-6 media-body">
               <h3 class="dropdown-item-title mb-1">
                 {{ friendRequest.senderUsername }}
               </h3>
-              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{ howLongAgo(friendRequest.dateTime) }} hours
+              <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i>{{ howLongAgo(friendRequest.dateTime) }}
+                hours
               </p>
             </div>
             <div class="col-3 d-flex">
@@ -27,7 +29,7 @@
           </div>
         </div>
         <div class="dropdown-divider"></div>
-  
+
       </ng-container>
     </ng-container>
     <ng-template #noFriendRequests>
@@ -40,6 +42,6 @@
       </div>
       <div class="dropdown-divider"></div>
     </ng-template>
-   
+
   </div>
 </li>

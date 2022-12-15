@@ -3,7 +3,7 @@
   <mat-form-field class="example-full-width" appearance="fill">
     <input type="text" placeholder="Search friends" matInput [formControl]="searchFriends" [matAutocomplete]="auto">
     <mat-autocomplete #auto="matAutocomplete" showPanel="true">
-      <mat-option *ngFor="let friend of friendsOptions$ | async" [value]="">
+      <mat-option *ngFor="let friend of friendsOptions" [value]="">
         {{friend.userName}}
         <button class="btn float-right text-sm text-success my-2 px-0" (click)="addFriend(friend.id)"><i class="fas fa-plus"
           style="font-size: 20px;"></i></button>

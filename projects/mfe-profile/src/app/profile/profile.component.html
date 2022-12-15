@@ -1,63 +1,66 @@
-<section class="content">
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-6 mx-auto p-4">
-                <form [formGroup]="updateProfileForm" (ngSubmit)="onUpdateProfile()">
+<ng-container *ngIf="(currentUser$ | async) !== null">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row col-md-10 mx-auto">
+                <div class="col-md-6 p-4">
                     <div class="card card-primary card-outline row align-items-end"
                         style="flex-direction: inherit!important">
                         <div class="card-body h-100 box-profile">
+                            <lib-update-photo [currentUser]="(currentUser$ | async)"></lib-update-photo>
 
-                            <lib-update-photo [currentUserId]="currentUser?.id"></lib-update-photo>
-
-                            <ul class="list-group list-group-unbordered mb-3">
-                                <strong>User name</strong>
-                                <div class="my-2">
-                                    <input type="text" class="form-control form-control-border"
-                                        placeholder="Name and surname" formControlName="userName">
+                            <form>
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <strong>User name</strong>
+                                    <div class="my-2">
+                                        <input type="text" #userName class="form-control form-control-border"
+                                            placeholder="Name and surname"
+                                            value="{{ (currentUser$ | async).userName }}">
+                                    </div>
+                                    <strong>Email</strong>
+                                    <div class="my-2">
+                                        <input disabled type="email" class="form-control form-control-border"
+                                            value="{{ (currentUser$ | async).email }}" placeholder="Email">
+                                    </div>
+                                </ul>
+                                <div class="col-12 p-2">
+                                    <button type="submit" class="btn btn-primary btn-block"
+                                        (click)="onUpdateProfile()">Save</button>
                                 </div>
-                                <strong>Email</strong>
-                                <div class="my-2">
-                                    <input disabled type="email" class="form-control form-control-border"
-                                        value="{{ currentUser?.email }}" placeholder="Email">
-                                </div>
-                            </ul>
-                        </div>
-                        <div class="col-12 p-2">
-                            <button type="submit" class="btn btn-primary btn-block">Edit</button>
+                            </form>
                         </div>
                     </div>
-                </form>
-            </div>
-            <div class="col-md-6 mx-auto p-4">
-                <form [formGroup]="updateProfileForm" (ngSubmit)="onUpdatePassword()">
-                    <div class="card card-success card-outline row align-items-end"
-                        style="flex-direction: inherit!important">
-                        <div class="card-body h-100 ">
-                            <ul class="list-group list-group-unbordered mb-3">
-                                <strong>Current password</strong>
-                                <div class="my-2">
-                                    <input type="password" class="form-control form-control-border"
-                                        formControlName="currentPassword">
-                                </div>
-                                <strong>New password</strong>
-                                <div class="my-2">
-                                    <input type="password" class="form-control form-control-border"
-                                        formControlName="newPassword">
-                                </div>
-                                <strong>Confirm new password</strong>
-                                <div class="my-2">
-                                    <input type="password" class="form-control form-control-border"
-                                        formControlName="newPasswordConfirm">
-                                </div>
-                            </ul>
-                        </div>
+                </div>
+                <div class="col-md-6 p-4">
+                    <form [formGroup]="updatePasswordForm" (ngSubmit)="onUpdatePassword()">
+                        <div class="card card-success card-outline row align-items-end"
+                            style="flex-direction: inherit!important">
+                            <div class="card-body h-100 ">
+                                <ul class="list-group list-group-unbordered mb-3">
+                                    <strong>Current password</strong>
+                                    <div class="my-2">
+                                        <input type="password" class="form-control form-control-border"
+                                            formControlName="currentPassword">
+                                    </div>
+                                    <strong>New password</strong>
+                                    <div class="my-2">
+                                        <input type="password" class="form-control form-control-border"
+                                            formControlName="newPassword">
+                                    </div>
+                                    <strong>Confirm new password</strong>
+                                    <div class="my-2">
+                                        <input type="password" class="form-control form-control-border"
+                                            formControlName="newPasswordConfirm">
+                                    </div>
+                                </ul>
+                            </div>
 
-                        <div class="col-12 p-2">
-                            <button type="submit" class="btn btn-success btn-block">Edit</button>
+                            <div class="col-12 p-2">
+                                <button type="submit" class="btn btn-success btn-block">Save</button>
+                            </div>
                         </div>
-                    </div>
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
-    </div>
-</section>
+    </section>
+</ng-container>

@@ -1,16 +1,17 @@
 import { catchError, map } from "rxjs/operators";
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable, of, ReplaySubject } from "rxjs";
+import { combineLatest, Observable, of, ReplaySubject } from "rxjs";
 import { environment } from "projects/shell/src/environments/environment";
-import { User } from "../models/user";
+import { Friend, FriendRequest, User } from "../models/user";
 import { FriendRequestForm } from "../models/Dtos/friend-request-dto";
 import { AcceptFriendForm } from "../models/Dtos/accept-friend-dto";
-import { UserProfile } from "../models/Dtos/user-profile-dto";
+import { ChangeUserName } from "../models/Dtos/change-user-name";
 import { UserPasswordChange } from "../models/Dtos/user-password-change";
-import { UserPhoto } from "../models/Dtos/user-photo-dto";
 
-@Injectable()
+@Injectable({
+  providedIn: "root",
+})
 export class UserService {
   private baseUrl = environment.apiUrl + "user/";
 
@@ -26,11 +27,19 @@ export class UserService {
       this.currentUserSource.next(null);
       return of(null);
     }
-    return this.http.get<User>(this.baseUrl + "getCurrentUser").pipe(
-      map((user: User) => {
-        if (user) {
-          this.currentUserSource.next(user);
+
+    return combineLatest([
+      this.getCurrentUserProfile(),
+      this.getCurrentUserFriends(),
+      this.getCurrentFriendRequests(),
+    ]).pipe(
+      map(([user, friends, friendRequests]) => {
+        if (!user.profilePictureUrl) {
+          user.profilePictureUrl = "../../assets/img/default-photo.png";
         }
+        user.friends = friends;
+        user.friendRequests = friendRequests;
+        this.currentUserSource.next(user);
       })
     );
   }
@@ -54,20 +63,32 @@ export class UserService {
     return this.http.post<any>(this.baseUrl + "acceptFriend", acceptFriendForm);
   }
 
-  public updateUserProfile(userProfile: UserProfile): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "updateProfile", userProfile);
+  public updateUserProfile(changeUserName: ChangeUserName): Observable<any> {
+    return this.http.post<any>(this.baseUrl + "updateProfile", changeUserName);
   }
 
-  public updateUserPassword(userPassword: UserPasswordChange): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "updateUserPassword", userPassword);
-  }
-
-  public updateUserPhoto(userPhoto: UserPhoto): Observable<any> {
-    return this.http.post<any>(this.baseUrl + "updateProfilePicture", userPhoto);
+  public updateUserPhoto(newPhoto: File): Observable<any> {
+    const formData = new FormData();
+    formData.append("file", newPhoto, newPhoto.name);
+    return this.http.post<any>(this.baseUrl + "updateProfilePicture", formData);
   }
 
   public logoutCurrentUser(): void {
     localStorage.removeItem("jwtToken");
     this.currentUserSource.next(null);
+  }
+
+  private getCurrentUserProfile() {
+    return this.http.get<User>(this.baseUrl + "getCurrentUser");
+  }
+
+  private getCurrentUserFriends() {
+    return this.http.get<Friend[]>(this.baseUrl + "getFriends");
+  }
+
+  private getCurrentFriendRequests() {
+    return this.http.get<FriendRequest[]>(
+      this.baseUrl + "getFriendRequests"
+    );
   }
 }

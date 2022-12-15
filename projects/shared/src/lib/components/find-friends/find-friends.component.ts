@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { FormControl } from "@angular/forms";
-import { map, Observable, startWith, tap } from "rxjs";
+import { debounce, filter, map, Observable, startWith, tap } from "rxjs";
 import { FriendRequestForm } from "../../models/Dtos/friend-request-dto";
 import { User } from "../../models/user";
 import { UserService } from "../../services/user.service";
@@ -17,28 +17,34 @@ export class FindFriendsComponent implements OnInit {
   public searched = false;
 
   private currentUser: User;
-  public friendsOptions$: Observable<User[]>;
-
+  public friendsOptions: User[];
 
   constructor(private userService: UserService) {}
 
   public ngOnInit() {
-    this.userService.currentUser$.subscribe(
-      (user: User) => (this.currentUser = user)
-    );
+    this.userService.currentUser$
+      .pipe(map((user: User) => (this.currentUser = user)))
+      .subscribe();
 
-    this.searchFriends.valueChanges.subscribe((value) => {
-      if (value?.length < 3) {
-        this.searched = false;
-        this.cleanSearch();
-      } else if (value?.length === 3 && !this.searched) {
-        this.searched = true;
-        this.getFriendByName(value);
-      } else if (value?.length > 3) {
-        this.filterFriends(value);
-      }
-      return null;
-    });
+    this.searchFriends.valueChanges
+      .pipe(
+        filter((value) => {
+          if (value?.length < 3) {
+            this.searched = false;
+            this.friendsOptions = [];
+          }
+          return value?.length >= 3;
+        }),
+        tap((value) => {
+          if (value.length === 3 && !this.searched) {
+            this.searched = true;
+            this.getFriendByName(value);
+          } else {
+            this.filterFriends(value);
+          }
+        })
+      )
+      .subscribe();
   }
 
   public addFriend(id: string) {
@@ -48,33 +54,27 @@ export class FindFriendsComponent implements OnInit {
   }
 
   private getFriendByName(name: string): void {
-    this.friendsOptions$ = this.userService
+    this.userService
       .searchFriendsByName(name)
       .pipe(
-        map((users) =>
-          users.filter(
-            (x) =>
-              x.id !== this.currentUser.id &&
-              !this.currentUser.friends
-                .map((friends) => friends.id)
-                .includes(x.id)
-          )
+        map(
+          (users) =>
+            (this.friendsOptions = users.filter(
+              (x) =>
+                x.id !== this.currentUser.id &&
+                !this.currentUser.friends
+                  .map((friends) => friends.id)
+                  .includes(x.id)
+            ))
         )
-      );
+      )
+      .subscribe();
   }
 
   private filterFriends(name: string): void {
     const filterValue = name.toLowerCase();
-    this.friendsOptions$ = this.friendsOptions$.pipe(
-      map((users: User[]) =>
-        users.filter((option) =>
-          option.userName.toLowerCase().includes(filterValue)
-        )
-      )
+    this.friendsOptions = this.friendsOptions.filter((option) =>
+      option.userName.toLowerCase().includes(filterValue)
     );
-  }
-
-  private cleanSearch(): void {
-    this.friendsOptions$ = null;
   }
 }

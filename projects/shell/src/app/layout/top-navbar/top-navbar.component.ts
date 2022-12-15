@@ -10,23 +10,19 @@ import { map, Observable } from "rxjs";
   styles: [".navbar { height: 70px; z-index: 1}"],
 })
 export class TopNavbarComponent implements OnInit {
-  public currentUserName$: Observable<string>;
+  public currentUser$: Observable<User>;
 
   constructor(
     private userService: UserService,
-    private router: Router,
     private toastr: ToastrService
   ) {}
 
   public ngOnInit(): void {
-    this.currentUserName$ = this.userService.currentUser$.pipe(
-      map((user: User) => user?.userName)
-    );
+    this.currentUser$ = this.userService.currentUser$;
   }
 
   public logoutCurrentUser() {
     this.userService.logoutCurrentUser();
     this.toastr.success("User has been logout");
-    this.router.navigateByUrl("account/login");
   }
 }

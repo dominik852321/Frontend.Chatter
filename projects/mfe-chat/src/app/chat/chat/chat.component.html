@@ -16,7 +16,7 @@
                         <span class="direct-chat-timestamp float-right" style="font-size: 0.7rem;">{{ convertDateTime(message.created)
                           }}</span>
                       </div>
-                      <img class="direct-chat-img" src="../assets/img/user1-128x128.jpg" alt="message user image">
+                      <img class="direct-chat-img" src="{{ getSender(message.senderId, 'photo') }}" alt="message user image">
                       <div class="direct-chat-text">
                         {{message.value}}
                       </div>
@@ -29,7 +29,7 @@
                         <span class="direct-chat-name float-right">{{currentUser.userName }}</span>
                         <span class="direct-chat-timestamp float-left" style="font-size: 0.7rem;">{{ convertDateTime(message.created) }}</span>
                       </div>
-                      <img class="direct-chat-img" src="../assets/img/user3-128x128.jpg" alt="message user image">
+                      <img class="direct-chat-img" src="{{ currentUser.profilePictureUrl }}" alt="message user image">
                       <div class="direct-chat-text">
                         {{message.value}}
                       </div>
