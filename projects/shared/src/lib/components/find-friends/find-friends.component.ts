@@ -50,7 +50,11 @@ export class FindFriendsComponent implements OnInit {
   public addFriend(id: string) {
     const friendRequestForm = {} as FriendRequestForm;
     friendRequestForm.userId = id;
-    this.userService.addUser(friendRequestForm).subscribe();
+    this.userService.addUser(friendRequestForm).subscribe((_) => {
+      this.userService.getCurrentUser().subscribe();
+      this.searchFriends.reset();
+      this.friendsOptions = null;
+    });
   }
 
   private getFriendByName(name: string): void {
@@ -64,7 +68,10 @@ export class FindFriendsComponent implements OnInit {
                 x.id !== this.currentUser.id &&
                 !this.currentUser.friends
                   .map((friends) => friends.id)
-                  .includes(x.id)
+                  .includes(x.id) &&
+                  !this.currentUser.friendRequests.map((friendRequsts) => friendRequsts.recipientId).includes(x.id)
+                  &&
+                  !this.currentUser.friendRequests.map((friendRequsts) => friendRequsts.senderId).includes(x.id)
             ))
         )
       )
