@@ -1,6 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { Router } from "@angular/router";
-import { User, UserService } from "@shared";
+import { SignalrService, User, UserService } from "@shared";
 import { ToastrService } from "ngx-toastr";
 import { map, Observable } from "rxjs";
 
@@ -14,7 +14,8 @@ export class TopNavbarComponent implements OnInit {
 
   constructor(
     private userService: UserService,
-    private toastr: ToastrService
+    private toastr: ToastrService,
+    private signalRService: SignalrService
   ) {}
 
   public ngOnInit(): void {
@@ -23,6 +24,7 @@ export class TopNavbarComponent implements OnInit {
 
   public logoutCurrentUser() {
     this.userService.logoutCurrentUser();
+    this.signalRService.disposeConnection();
     this.toastr.success("User has been logout");
   }
 }

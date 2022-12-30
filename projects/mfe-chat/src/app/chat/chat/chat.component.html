@@ -1,56 +1,59 @@
 <div *ngIf="currentRoomId?.length !== 0 && currentUser" class="content-wrapper">
   <section class="content h-100">
-        <section class="col-lg-10 mx-auto h-100" style="padding-top: 0.5rem;">
-          <div class="card direct-chat direct-chat-primary">
-            <div class="card-header">
-              <h3 class="card-title m-0"><strong>{{ currentRoom?.name }}</strong></h3>
-            </div>
-            <div class="card-body">
-              <div class="direct-chat-messages">
-                <ng-container *ngFor="let message of currentRoomMessages">
+    <section class="col-lg-10 mx-auto h-100" style="padding-top: 0.5rem;">
+      <div class="card direct-chat direct-chat-primary">
+        <div class="card-header">
+          <h3 class="card-title m-0"><strong>{{ currentRoom?.name }}</strong></h3>
+        </div>
+        <div class="card-body">
+          <div class="direct-chat-messages" #scrollChat [scrollTop]="scrollChat.scrollHeight">
+            <ng-container *ngFor="let message of currentRoomMessages">
 
-                  <ng-container *ngIf="currentUser.id !== message.senderId; else messageFromCurrentUser">
-                    <div class="direct-chat-msg">
-                      <div class="direct-chat-infos clearfix">
-                        <span class="direct-chat-name float-left">{{ getSender(message.senderId, "name") }}</span>
-                        <span class="direct-chat-timestamp float-right" style="font-size: 0.7rem;">{{ convertDateTime(message.created)
-                          }}</span>
-                      </div>
-                      <img class="direct-chat-img" src="{{ getSender(message.senderId, 'photo') }}" alt="message user image">
-                      <div class="direct-chat-text">
-                        {{message.value}}
-                      </div>
-                    </div>
-                  </ng-container>
+              <ng-container *ngIf="currentUser.id !== message.senderId; else messageFromCurrentUser">
+                <div class="direct-chat-msg">
+                  <div class="direct-chat-infos clearfix">
+                    <span class="direct-chat-name float-left">{{ getSender(message.senderId, "name") }}</span>
+                    <span class="direct-chat-timestamp float-right" style="font-size: 0.7rem;">{{
+                      convertDateTime(message.created)
+                      }}</span>
+                  </div>
+                  <img class="direct-chat-img" src="{{ getSender(message.senderId, 'photo') }}"
+                    alt="message user image">
+                  <div class="direct-chat-text">
+                    {{message.value}}
+                  </div>
+                </div>
+              </ng-container>
 
-                  <ng-template #messageFromCurrentUser>
-                    <div class="direct-chat-msg right">
-                      <div class="direct-chat-infos clearfix">
-                        <span class="direct-chat-name float-right">{{currentUser.userName }}</span>
-                        <span class="direct-chat-timestamp float-left" style="font-size: 0.7rem;">{{ convertDateTime(message.created) }}</span>
-                      </div>
-                      <img class="direct-chat-img" src="{{ currentUser.profilePictureUrl }}" alt="message user image">
-                      <div class="direct-chat-text">
-                        {{message.value}}
-                      </div>
-                    </div>
-                  </ng-template>
+              <ng-template #messageFromCurrentUser>
+                <div class="direct-chat-msg right">
+                  <div class="direct-chat-infos clearfix">
+                    <span class="direct-chat-name float-right">{{currentUser.userName }}</span>
+                    <span class="direct-chat-timestamp float-left" style="font-size: 0.7rem;">{{
+                      convertDateTime(message.created) }}</span>
+                  </div>
+                  <img class="direct-chat-img" src="{{ currentUser.profilePictureUrl }}" alt="message user image">
+                  <div class="direct-chat-text">
+                    {{message.value}}
+                  </div>
+                </div>
+              </ng-template>
 
-                </ng-container>
-              </div>
-            </div>
-            <div class="card-footer">
-              <form>
-                <div class="input-group">
-                  <input type="text" name="message" placeholder="Write message..." [formControl]="newMessage"
-                    class="form-control" (keyup.enter)="sendMessage()">
-                  <!-- <span class="input-group-append">
+            </ng-container>
+          </div>
+        </div>
+        <div class="card-footer">
+          <form>
+            <div class="input-group">
+              <input type="text" name="message" placeholder="Write message..." [formControl]="newMessage"
+                class="form-control" (keyup.enter)="sendMessage()">
+              <!-- <span class="input-group-append">
                     <button type="button" class="btn btn-success" (keyup.enter)="sendMessage()" (click)="sendMessage()">Send</button>
                   </span> -->
-                </div>
-              </form>
             </div>
-          </div>
-        </section>
+          </form>
+        </div>
+      </div>
+    </section>
   </section>
 </div>

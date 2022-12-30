@@ -1,8 +1,6 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 import { Friend, SignalrService, User, UserService } from "@shared";
-import { ToastrService } from "ngx-toastr";
 import { map, Observable } from "rxjs";
-import { ChatComponent } from "../chat/chat.component";
 
 @Component({
   selector: "app-left-sidebar",
@@ -21,8 +19,8 @@ export class LeftSidebarComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this.signalrService.createConnection();
     this.currentUser$ = this.userService.currentUser$;
+    this.signalrService.createConnection();
   }
 
   public onSelectFriend(friend: Friend) {

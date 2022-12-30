@@ -1,4 +1,12 @@
-import { Component, Input, OnChanges, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import {
+  Component,
+  ElementRef,
+  Input,
+  OnChanges,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from "@angular/core";
 import { FormControl } from "@angular/forms";
 import { ChatService, Message, Room, SignalrService, User } from "@shared";
 import { catchError, forkJoin, map, Observable, of, Subscription } from "rxjs";
@@ -12,6 +20,7 @@ export class ChatComponent implements OnChanges {
   @Input() public currentUser: User;
   @Input() public currentRoomId: string;
 
+  @ViewChild("scrollChat") private scrollChatContainer: ElementRef;
 
   public newMessage = new FormControl<string>("");
   public currentRoom: Room;
@@ -49,7 +58,9 @@ export class ChatComponent implements OnChanges {
         return user?.userName;
       }
       case "photo": {
-        return user?.profilePictureUrl ? user?.profilePictureUrl : "../../assets/img/default-photo.png";
+        return user?.profilePictureUrl
+          ? user?.profilePictureUrl
+          : "../../assets/img/default-photo.png";
       }
       default: {
         return "";
@@ -71,6 +82,7 @@ export class ChatComponent implements OnChanges {
         this.currentRoomMessages = currentRoomMessages;
         this.subscribeCurrentRoomMessages();
         this.setRoomName();
+        this.scrollToBottom();
       })
     );
   }
@@ -87,13 +99,20 @@ export class ChatComponent implements OnChanges {
   private setRoomName() {
     if (this.currentRoom.name === "" || this.currentRoom.name === "default") {
       this.currentRoom.name = "";
-      const usersWithoutCurrent = this.currentRoom.users.filter(x => x.id !== this.currentUser.id);
+      const usersWithoutCurrent = this.currentRoom.users.filter(
+        (x) => x.id !== this.currentUser.id
+      );
       for (let i = 0; i < usersWithoutCurrent.length; i++) {
         this.currentRoom.name += usersWithoutCurrent[i]?.userName;
-        if (i+1 !== usersWithoutCurrent.length) {
+        if (i + 1 !== usersWithoutCurrent.length) {
           this.currentRoom.name += ", ";
         }
       }
     }
+  }
+
+  private scrollToBottom(): void {
+    const scroll: HTMLDivElement = this.scrollChatContainer.nativeElement;
+    scroll.scrollTop = Math.max(0, scroll.scrollHeight - scroll.offsetHeight);
   }
 }
