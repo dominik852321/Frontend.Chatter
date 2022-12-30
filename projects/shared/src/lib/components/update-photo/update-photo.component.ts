@@ -1,7 +1,7 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
 import { ToastrService } from "ngx-toastr";
-import { catchError, of } from "rxjs";
+import { catchError, of, throwError } from "rxjs";
 import { User } from "../../models/user";
 import { UserService } from "../../services/user.service";
 
@@ -43,8 +43,8 @@ export class UpdatePhotoComponent implements OnInit {
       .updateUserPhoto(this.newPhoto)
       .pipe(
         catchError((response: HttpErrorResponse) => {
-          this.toastr.error(response.error.message);
-          return of(response);
+          this.toastr.error(response?.error?.message);
+          return throwError(response);
         })
       )
       .subscribe((_) => {

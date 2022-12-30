@@ -14,7 +14,15 @@ import {
   AuthService,
 } from "@shared";
 import { ToastrService } from "ngx-toastr";
-import { catchError, finalize, map, Observable, of, tap } from "rxjs";
+import {
+  catchError,
+  finalize,
+  map,
+  Observable,
+  of,
+  tap,
+  throwError,
+} from "rxjs";
 
 @Component({
   selector: "app-profile",
@@ -58,7 +66,7 @@ export class ProfileComponent implements OnInit {
       .pipe(
         catchError((response: HttpErrorResponse) => {
           this.toastr.error("Problem with update");
-          return of(response);
+          return throwError(response);
         })
       )
       .subscribe((_) => {
@@ -85,7 +93,7 @@ export class ProfileComponent implements OnInit {
       .pipe(
         catchError((response: HttpErrorResponse) => {
           this.toastr.error(response?.error?.message);
-          return of(response);
+          return throwError(response);
         })
       )
       .subscribe((_) => {
