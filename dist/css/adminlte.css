@@ -46612,11 +46612,6 @@ select.form-control-sm~.select2-container--default .select2-selection--multiple 
   border-radius: 50%;
 }
 
-.img-size-64,
-.img-size-50,
-.img-size-32 {
-  height: auto;
-}
 
 .img-size-64 {
   width: 64px;
@@ -46624,6 +46619,7 @@ select.form-control-sm~.select2-container--default .select2-selection--multiple 
 
 .img-size-50 {
   width: 50px;
+  height: 50px;
 }
 
 .img-size-32 {

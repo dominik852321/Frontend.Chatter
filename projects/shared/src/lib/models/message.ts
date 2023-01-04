@@ -8,6 +8,11 @@ export class Message {
   value: string;
 }
 
+export class StatusChange {
+  status: number;
+  userId: string;
+}
+
 export class Room {
   id: string;
   name: string;

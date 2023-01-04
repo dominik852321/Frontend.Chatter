@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import * as signalR from "@microsoft/signalr";
 import { environment } from "projects/shell/src/environments/environment";
 import { BehaviorSubject, map, ReplaySubject } from "rxjs";
-import { Message } from "../models/message";
+import { Message, StatusChange } from "../models/message";
 import { Friend, User } from "../models/user";
 import { UserService } from "./user.service";
 
@@ -68,8 +68,10 @@ export class SignalrService {
   }
 
   private statusMessage(): void {
-    this.hubConnection.on("StatusMessage", (status) => {
-      console.log(status);
+    this.hubConnection.on("StatusMessage", (statusChange: StatusChange) => {
+      this.userService.currentUser$.pipe(map((user:User) => {
+        user.friends.find(x => x.id === statusChange.userId).status = statusChange.status;
+      })).subscribe();
     });
   }
 
@@ -90,6 +92,4 @@ export class SignalrService {
       .send("ConnectToRoom", roomId)
       .catch((err) => console.log(err));
   }
-
-
 }

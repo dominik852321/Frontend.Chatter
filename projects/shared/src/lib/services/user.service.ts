@@ -7,7 +7,6 @@ import { Friend, FriendRequest, User } from "../models/user";
 import { FriendRequestForm } from "../models/Dtos/friend-request-dto";
 import { AcceptFriendForm } from "../models/Dtos/accept-friend-dto";
 import { ChangeUserName } from "../models/Dtos/change-user-name";
-import { UserPasswordChange } from "../models/Dtos/user-password-change";
 
 @Injectable({
   providedIn: "root",

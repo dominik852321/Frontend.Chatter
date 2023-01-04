@@ -14,6 +14,7 @@
                                         <img class="direct-leftsidebar-img"
                                             src="{{ friend.profilePictureUrl ? friend.profilePictureUrl : '../../assets/img/default-photo.png'}}"
                                             alt="message user image">
+                                        <span class="badge badge-warning status-badge" [ngClass]="friend.status === 0 ? 'offline' : 'online'"></span>
                                         <p class="ml-2">{{ friend.userName }}</p>
                                     </a>
                                 </li>
